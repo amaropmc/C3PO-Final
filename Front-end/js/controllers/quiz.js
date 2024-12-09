@@ -23,6 +23,7 @@ export const loadQuiz = async (planetName) => {
 
     if(!visitedPlanets.includes(planetName)) {
         renderQuiz(planetQuiz);
+        console.log(planetQuiz);
         visitedPlanets.push(planetName);
     } else {
         console.log("This planet's quiz has already been taken.");
@@ -34,6 +35,7 @@ const renderQuiz = planetQuiz => {
     
     /*Tracks which question in the planetQuiz array is currently being displayed.*/    
     let currentQuestionIndex = 0;
+    console.log(currentQuestionIndex);
 
     const showNextQuestion = () => {
         if(currentQuestionIndex < planetQuiz.length) {
@@ -56,18 +58,19 @@ This function takes in an object from the array and has a call back function - o
 
 const generateQuizCard = (questionAndAnswer, onAnswerSelect) => {
     const mainElement = document.getElementById("main");
-    mainElement.className = "pop-up";
+    //mainElement.className = "pop-up";
     mainElement.innerHTML = " ";
 
         const quizFramework = div(["quiz-framework"]);
-        quizFramework.style.visibility = "visible"; 
-        quizFramework.setAttribute("style", "display: flex");
-        quizFramework.style.display = "flex";
+        //quizFramework.style.visibility = "visible"; 
+        //quizFramework.setAttribute("style", "display: flex");
+        //quizFramework.style.display = "flex";
 
             const c3poContainer = div(["robot-container"]);
 
-                const robotImage = div(["robot-img"]);
-                robotImage.src = "./assets/C-3PO.jpg";
+                const robotImage = document.createElement('img');
+                robotImage.className = "robot-image";
+                robotImage.src = "/assets/C-3PO.jpg";
 
                 const dialogBaloon = div(["dialog"]);
                 dialogBaloon.innerHTML= "Good luck to you!"
@@ -83,7 +86,7 @@ const generateQuizCard = (questionAndAnswer, onAnswerSelect) => {
     
                 const questionHeader = div(["question-header"]);
     
-                    const backButton = element("button", ["back-btn"], "back", renderPage("/planet"));
+                    const backButton = element("button", ["back-btn"], "back");
                     
                     questionHeader.appendChild(backButton);
 

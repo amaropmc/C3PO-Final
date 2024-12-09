@@ -1,7 +1,6 @@
 package com.codeforall.online.c3po.services;
 
 
-import com.codeforall.online.c3po.exceptions.PlayerAlreadyExistsException;
 import com.codeforall.online.c3po.exceptions.PlayerNotFoundException;
 import com.codeforall.online.c3po.model.Player;
 import com.codeforall.online.c3po.persistence.dao.PlayerDao;
@@ -12,6 +11,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * A {@link PlayerService}implementation
+ */
 @Service
 public class PlayerServiceImpl implements PlayerService {
 

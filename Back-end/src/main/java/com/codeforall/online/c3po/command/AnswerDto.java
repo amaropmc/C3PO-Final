@@ -10,11 +10,9 @@ import jdk.jfr.BooleanFlag;
  */
 public class AnswerDto {
     private Long id;
-
     @NotBlank
     @NotNull
     private String description;
-
     @BooleanFlag
     private boolean correct;
 

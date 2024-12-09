@@ -10,7 +10,6 @@ import jakarta.validation.constraints.Size;
  */
 public class PlanetDto {
     private Long id;
-
     @NotNull
     @NotBlank
     @Size(min = 3, max = 64)
