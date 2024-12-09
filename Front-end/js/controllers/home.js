@@ -58,22 +58,31 @@ const home = () => {
             form.appendChild(submitButton);
 
             // Form submit handler
-            form.addEventListener("submit", (event) => {
+            form.addEventListener("submit", async(event) => {
                 event.preventDefault(); 
 
-                const userName = document.getElementById("user").value.trim();
-/*
-                if(playerExists(userName)) {
-                    alert("This username has already been taken");
+                const userName= document.getElementById("user").value.trim();
 
-                } else {
-*/
+                if(!userName){
+                    alert("Tell me your name, Jedi");
+                    return;
+                }
+
+                try{
+                    const exists = await playerExists(userName);
+                    if (exists){
+                        alert("This name is not part of our planet. Please choose another.");
+                        return;
+                    }      
+
                     const path = "/planet";
-
                     window.history.pushState({}, '', path);
-    
                     renderPage(path);
                 
+                } catch (error) {
+                    console.error("Error checking username existence:", error.message);
+                    alert("An error occurred while processing your request. Please try again.");
+                }
             });
 
             formContainer.appendChild(form);    
@@ -138,3 +147,4 @@ const routes = [
 window.onload = () => {
     renderPage("/");
 }
+

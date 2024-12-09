@@ -36,6 +36,14 @@ export const score = (userScore) => {
         robotGif.src = "./assets/c3po/r2.png"; 
     }
 
+    if(visitedPlanets.lenght === 6){
+        leaderBoard();
+    }
+
+    function leaderBoard(){
+        message = "You are amazing Jedi! <br> Together we learn a lot about this wonderfull universe. <br> You final score is: <br> ${userScore} "
+    }
+
     resultMessage.innerHTML = message;
     robotGif.className = "robot-gif";
 
