@@ -15,7 +15,7 @@ const selectedPlanets = [
   "Dagobah",
 ];
 
- export const loadPlanets = async (func) => {
+export const loadPlanets = async (func) => {
   const response = await fetch(PLANETS_URL);
   if (response.ok) {
     const data = await response.json();
@@ -33,6 +33,14 @@ export const populatePlanets = () => {
 
   const planetContainer = div(["planet-container"]);
 
+  const firstLine = element("h1", ["margin-top-1"], "$");
+  const secondLine = element("h1", ["letter-spacing"], "May the knowledge");
+  const thirdLine = element("h1", ["letter-spacing"], "be with you");
+
+  mainElement.appendChild(firstLine);
+  mainElement.appendChild(secondLine);
+  mainElement.appendChild(thirdLine);
+
   planets = planets.filter((planet) => {
     return selectedPlanets.includes(planet.name);
   });
@@ -48,15 +56,15 @@ export const populatePlanets = () => {
     const infoPlanetWrapper = div(["info-planet-wrapper"]);
 
     // planet button
-    const planetButton = element('button', ["planet-button"], "Taque quiz");
+    const planetButton = element("button", ["planet-button"], "Take quiz");
     planetButton.onclick = (event) => {
-        event.preventDefault();
+      event.preventDefault();
 
-        const path = `/planet/${planet.name}/quiz`;
+      const path = `/planet/${planet.name}/quiz`;
 
-        window.history.pushState({},'',path);
+      window.history.pushState({}, "", path);
 
-        renderPage(path);
+      renderPage(path);
     };
 
     // planet info
@@ -87,9 +95,15 @@ export const populatePlanets = () => {
     }
     planetItem.className = planetItemClassName;
 
-    planetWrapper.prepend(planetButton);
+    /*planetWrapper.prepend(planetButton);
     infoPlanetWrapper.appendChild(planetItem);
     infoPlanetWrapper.appendChild(planetInfo);
+    planetWrapper.appendChild(infoPlanetWrapper);
+    planetContainer.appendChild(planetWrapper);*/
+
+    infoPlanetWrapper.appendChild(planetItem);
+    infoPlanetWrapper.appendChild(planetInfo);
+    planetInfo.appendChild(planetButton);
     planetWrapper.appendChild(infoPlanetWrapper);
     planetContainer.appendChild(planetWrapper);
 
