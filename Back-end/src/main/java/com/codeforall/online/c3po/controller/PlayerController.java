@@ -58,6 +58,8 @@ public class PlayerController {
     public ResponseEntity<?> addPlayer(@Valid @RequestBody PlayerDto playerDto, BindingResult bindingResult,
                                        UriComponentsBuilder uriComponentsBuilder) {
 
+        Player savedPlayer = null;
+
         if (bindingResult.hasErrors()) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
@@ -69,11 +71,16 @@ public class PlayerController {
                 return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
             }
 
-            if(getPlayerByUsername(player.getUsername()) != null) {
-                throw new PlayerAlreadyExistsException();
-            }
+            try {
+                Player playerExists = playerService.getPlayer(player.getUsername());
 
-            Player savedPlayer = playerService.registerPlayer(player.getUsername(), player.getTotalScore());
+                if(playerExists != null) {
+                    throw new PlayerAlreadyExistsException();
+                }
+
+            } catch (PlayerNotFoundException e) {
+                savedPlayer = playerService.registerPlayer(player.getUsername(), player.getTotalScore());
+            }
 
             UriComponents uriComponents = uriComponentsBuilder
                     .path("/api/player/" + savedPlayer.getUsername()).build();

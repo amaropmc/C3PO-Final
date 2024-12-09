@@ -10,18 +10,9 @@ import org.springframework.stereotype.Component;
 @Component
 public class PlayerDtoToPlayer {
 
-    private PlayerService playerService;
-
-
     public Player convert(PlayerDto playerDto) throws PlayerNotFoundException {
 
-        Player player;
-
-        if (playerDto.getUsername() != null) {
-            player = playerService.getPlayer(playerDto.getUsername());
-        } else {
-            player = new Player();
-        }
+        Player player = new Player();
 
         player.setUsername(playerDto.getUsername());
         player.setTotalScore(playerDto.getScore());
@@ -29,10 +20,4 @@ public class PlayerDtoToPlayer {
         return player;
 
     }
-
-    @Autowired
-    public void setPlayerService(PlayerService playerService) {
-        this.playerService = playerService;
-    }
-
 }

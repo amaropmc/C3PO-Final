@@ -29,7 +29,7 @@ public interface PlayerService {
      * @param username the username of the Player
      * @return the added player
      */
-    Player registerPlayer(String username, Integer score) throws PlayerAlreadyExistsException;
+    Player registerPlayer(String username, Integer score);
 
     /**
      * login?

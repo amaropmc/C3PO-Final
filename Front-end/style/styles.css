@@ -1,0 +1,509 @@
+@font-face {
+    font-family: starwars;
+    src: url(/assets/font/Starjedi.ttf);
+}
+  
+body {
+    background: url(/assets/background/backgroundplanets.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    font-family: "starwars", sans-serif;
+    margin: 0;
+    height: 100vh;
+    overflow: hidden;
+  }
+  
+  #main {
+    display: flex;
+    width: 100%;
+    height: auto;
+    overflow: scroll;
+    background:linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3));
+    background-size: cover; 
+    position: relative; 
+  }
+
+
+  .header-form-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    max-width: 60%;
+    gap: 1rem;
+  }
+
+  .title-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-top: 10vh;
+    width: 100%;
+    position: relative;
+    color: white;
+  }
+  
+  .title-container h1 {       
+    font-size: 7vw;       
+    text-align: center;     
+    color: white;   
+    text-shadow: 2px 2px 4px #000, 0 0 25px #5b4804, 0 0 5px #5b4804; 
+    padding: 0;
+    margin: 0;
+    word-wrap: break-word;
+    max-width: 100%;
+    text-align: center;
+  }
+
+  .title-container h2 {       
+    font-size: 1vw;       
+    text-align: center;     
+    color: white;   
+    text-shadow: 2px 2px 4px #000, 0 0 25px #5b4804, 0 0 5px #5b4804; 
+    padding: 0;
+    margin: 0;
+    word-wrap: break-word;
+    max-width: 100%;
+    text-align: center;
+  }
+  
+  .header-container {
+    margin-bottom: 2vh;
+    background: linear-gradient(135deg, rgba(250, 243, 224, 0.1), rgba(240, 200, 140, 0.5), #E6BE8A);
+    border-radius: 15px; 
+    padding-top: 10px;
+    padding-bottom: 20px;
+    position: relative;
+    width: 100%;
+    height: auto;
+  }
+  
+  .header-container h1 {
+    padding: 5vh;
+    font-size: 1.5vw;
+    text-align: center;
+    color: #35124e;
+    text-shadow: 2px 2px 4px #000, 0 0 25px #ffcc00, 0 0 5px #ffcc00;
+    animation: textGlow 2s ease-in-out infinite, slideIn 1.5s ease-out;
+  }
+
+  .form-container form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 20px;
+    border-radius: 8px;
+    color: #333;
+    max-width: 100%; 
+    background: linear-gradient(135deg, rgba(250, 243, 224, 0.1), rgba(240, 200, 140, 0.5), #E6BE8A);
+  }
+  
+  .form-container form input {
+    margin-bottom: 2%;
+    padding: 10px;
+    border: 1px solid rgb(251, 223, 145);
+    border-radius: 4px;
+  }
+  
+  .form-container form button {
+    color: rgb(48, 35, 2);;
+    border: none;
+    padding: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .form-container form button:hover {
+    background-color: #6b5704;
+  }
+
+  .image-robot-container {
+    flex: 1;
+    max-width: 100%;
+    position: relative;
+  }
+  
+  .image-robot-container img {
+    height: 100%;
+    width: 130%; 
+  }
+
+  .site-footer {
+    background: black;
+    color: white;
+    padding: 15px; 
+    font-size: 2.5vw;
+    position: relative; 
+    width: 100%; 
+    display: flex; 
+    justify-content: center; 
+    align-items: center;
+    padding: 0;
+  }
+  
+  .footer-content {
+    display: flex; 
+    gap: 20px; 
+  }
+  
+  .footer-content p {
+    margin: 0; 
+    font-weight: bold; 
+  }
+
+/**** PLANETS ****/
+
+h1 {
+  text-align: center;
+  color: white;
+  font-size: 50px;
+  margin: 0;
+}
+
+.letter-spacing {
+  animation-name: compactLetters;
+  animation-duration: 3s;
+  animation-fill-mode: forwards;
+}
+
+h2 {
+  text-align: center;
+  color: white;
+  font-size: 30px;
+  margin: 0;
+}
+.pop-up {
+  animation-name: popUp;
+  animation-duration: 3s;
+  animation-fill-mode: forwards;
+}
+
+.planet-wrapper {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  position: relative;
+  cursor: pointer;
+}
+
+.planet-info {
+  color: black;
+  position: absolute;
+  z-index: 2;
+  top: 80%;
+  right: -70px;
+  display: none;
+  border-radius: 10px;
+  background-color: white;
+  padding: 20px;
+  animation-name: planetCard;
+  animation-duration: 0.7s;
+  animation-timing-function: ease-in;
+  animation-fill-mode: forwards;
+  width: 300px;
+  overflow: hidden;
+}
+
+.planet-info div {
+  margin-bottom: 5px;
+}
+
+.planet-info div > .label {
+  font-size: 16px;
+  color: black;
+}
+
+.planet-info div > .label > span {
+  font-size: 14px;
+
+  color: #2ff924;
+}
+.info-planet-wrapper {
+  position: relative;
+  width: 200px;
+}
+
+/* align verticaly*/
+.info-planet-wrapper:hover .planet-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.star-wars-planets {
+  width: 200px;
+  height: 200px;
+  border-radius: 100%;
+
+  background-size: cover;
+  box-shadow:
+    inset 16px 0 40px 3px rgba(0, 0, 0, 0.6),
+    inset -3px 0 5px 1px;
+  background-repeat: repeat-x;
+  animation-name: planetRotate;
+  animation-duration: 6s;
+  animation-fill-mode: forwards;
+  animation-direction: normal;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+  transform: rotate(15deg);
+}
+
+.star-wars-planets:hover {
+  animation-name: planetRotate, scaleUpPlanet;
+  animation-duration: 6s, 2s;
+  animation-fill-mode: forwards;
+  animation-direction: normal, normal;
+  animation-fill-mode: forwards, forwards;
+  animation-iteration-count: infinite, 1;
+  animation-timing-function: linear, ease-in-out;
+  z-index: 1;
+}
+
+.planet-even {
+  margin-top: 70px;
+}
+
+#planet-container {
+  flex-wrap: wrap;
+  justify-content: center;
+  max-width: 90%;
+  align-items: center;
+  display: flex;
+  gap: 80px;
+  margin: auto;
+  margin-top: 9rem;
+}
+
+.planet-button {
+  position: absolute;
+  top: -91px;
+  z-index: 5;
+}
+
+.planet-button-even {
+  top: -28px;
+}
+
+
+/* Animations*/
+
+@keyframes planetRotate {
+  0% {
+    background-position-x: 0%;
+  }
+  50% {
+    background-position-x: 100%;
+  }
+  100% {
+    background-position-x: 200%;
+  }
+}
+
+@keyframes planetCard {
+  0% {
+    opacity: 0;
+    height: 0px;
+  }
+  100% {
+    opacity: 0.8;
+    height: 300px;
+  }
+}
+
+@keyframes scaleUpPlanet {
+  0% {
+    transform: scale(1) rotate(15deg);
+  }
+  100% {
+    transform: scale(1.5) rotate(15deg);
+  }
+}
+
+@keyframes popUp {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes compactLetters {
+  0% {
+    letter-spacing: 50px;
+  }
+  100% {
+    letter-spacing: 3px;
+  }
+}
+
+
+/**** QUIZ ****/
+
+#quiz-framework {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+    url(/assets/backgroundplanets.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 80vh;
+  width: 100vw;
+  position: absolute;
+  z-index: 6;
+  display: none;
+  top: 10vh;
+}
+
+.question-box {
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(to bottom, rgba(0, 123, 167, 0.7), rgba(0, 51, 102, 0.7));
+  border: 2px solid white;
+  border-radius: 10px; 
+  z-index: 7;
+  margin: 3% 10% 3% 10%;
+  height: 40%;
+  color: white;
+}
+
+.question-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 2%;
+  max-height: 20%;
+}
+
+.question-header .counter {
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.question-content {
+  display: flex;
+  flex-direction: column; 
+  justify-content: center; 
+  align-items: center; 
+  height: 60%;
+  font-size: 40px;
+  text-align: center; 
+  word-wrap: break-word; 
+}
+
+.answers-box {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 20px; 
+  width: 80%;
+  margin: 3% 10% 3% 10%;
+}
+
+.answer-option {
+  background: linear-gradient(to bottom, rgba(0, 123, 167, 0.7), rgba(0, 51, 102, 0.7));
+  color: white;
+  border: 2px solid white;
+  border-radius: 8px;
+  padding: 15px;
+  text-align: center;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.2s, background 0.2s;
+}
+
+
+
+  @keyframes textGlow {
+    0% {
+        text-shadow: 0 0 5px #ffcc00, 0 0 10px #ffcc00, 0 0 15px #ffcc00;
+    }
+    50% {
+        text-shadow: 0 0 10px #ffcc00, 0 0 20px #ffcc00, 0 0 30px #ffcc00;
+    }
+    100% {
+        text-shadow: 0 0 5px #ffcc00, 0 0 10px #ffcc00, 0 0 15px #ffcc00;
+    }
+  }
+  
+  @keyframes slideIn {
+    0% {
+        transform: translateX(-100%);
+    }
+    100% {
+        transform: translateX(0);
+    }
+  }
+
+  /* Media Queries */
+
+  @media (max-width: 768px) {
+
+    .body{
+      align-items: flex-start;
+    }
+
+    #main {
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+    }
+
+    .title-container h1 {
+      font-size: 10vw; /* Larger font size relative to screen width */
+    }
+
+    .title-container h2 {
+      font-size: 4vw; /* Adjust the subtitle size accordingly */
+    }
+
+    .header-container h1 {
+      font-size: 2vw;
+    }
+  
+    .header-form-container {
+      justify-content: center;
+      align-items:  center;
+      max-width: 100%;
+      margin: 5%;
+     }
+
+    .image-robot-container img {
+      display: none;
+    }
+
+    .footer-content {
+      gap: 10px; 
+      font-size: 2.5vw;
+      padding: 0;
+    }
+  
+  }
+
+  @media (max-width: 480px) {
+    .title-container h1 {
+        font-size: 10vw; /* Even larger for better readability */
+    }
+
+    .title-container h2 {
+        font-size: 6vw;
+    }
+
+    .header-container h1 {
+      font-size: 4vw;
+    }
+
+
+@media (max-width: 768px) {
+  .question-content {
+    font-size: 30px;
+  }
+}
+
+@media (max-width: 480px) {
+  .question-content {
+    font-size: 20px;
+  }
+}
+
+}

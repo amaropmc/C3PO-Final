@@ -48,7 +48,7 @@ public class PlayerServiceImpl implements PlayerService {
      * @return
      */
     @Override
-    public Player registerPlayer(String username, Integer score) throws PlayerAlreadyExistsException {
+    public Player registerPlayer(String username, Integer score) {
 
         if (username == null || username.isEmpty()) {
             throw new IllegalArgumentException("Username cannot be null or empty");

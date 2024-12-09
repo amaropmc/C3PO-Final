@@ -1,8 +1,10 @@
 package com.codeforall.online.c3po.persistence.dao.jpa;
 
+import com.codeforall.online.c3po.exceptions.PlayerNotFoundException;
 import com.codeforall.online.c3po.model.Player;
 import com.codeforall.online.c3po.persistence.dao.PlayerDao;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.NoResultException;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Root;
@@ -19,7 +21,7 @@ public class JpaPlayerGenericDao extends JpaGenericDao<Player> implements Player
         super(Player.class);
     }
 
-    public Player findByUsername(String username) {
+    public Player findByUsername(String username) throws PlayerNotFoundException {
         EntityManager em = sm.getCurrentSession();
 
         CriteriaBuilder cb = em.getCriteriaBuilder();
@@ -28,6 +30,11 @@ public class JpaPlayerGenericDao extends JpaGenericDao<Player> implements Player
         criteriaQuery.select(root);
         criteriaQuery.where(cb.equal(root.get("username"), username));
 
-        return em.createQuery(criteriaQuery).getSingleResult();
+        try {
+            return em.createQuery(criteriaQuery).getSingleResult();
+
+        } catch (NoResultException e) {
+            throw new PlayerNotFoundException();
+        }
     }
 }
