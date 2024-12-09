@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DiffGenerationConfig" isInitGenerateDdl="true">
+    <option name="initGenerateDdl" value="true" />
+    <option name="sourceModelValue" value="C3PO-final:C3PO-final" />
+    <option name="targetDbValue" value="1df87f59-2e44-4d47-9b82-a8856a3914e9" />
+  </component>
+</project>
