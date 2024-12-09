@@ -5,7 +5,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 /**
- * A class that represents an answer to a question
+ * A class that represents an answer to a question of the quiz
  */
 @Entity
 @Table(name = "answers")

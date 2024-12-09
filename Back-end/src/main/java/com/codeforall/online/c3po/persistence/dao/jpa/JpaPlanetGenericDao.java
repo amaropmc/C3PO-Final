@@ -20,6 +20,7 @@ public class JpaPlanetGenericDao extends JpaGenericDao<Planet> implements Planet
 
     /**
      * Retrieves a planet from the database according to its name
+     *
      * @param name the name of the planet to be retrieved
      * @return the planet with the specified name
      */

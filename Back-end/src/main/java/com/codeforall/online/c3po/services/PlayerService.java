@@ -1,11 +1,13 @@
 package com.codeforall.online.c3po.services;
 
-import com.codeforall.online.c3po.exceptions.PlayerAlreadyExistsException;
 import com.codeforall.online.c3po.exceptions.PlayerNotFoundException;
 import com.codeforall.online.c3po.model.Player;
 
 import java.util.List;
 
+/**
+ * Common interface for player services, provides methods to manage players
+ */
 public interface PlayerService {
 
     /**

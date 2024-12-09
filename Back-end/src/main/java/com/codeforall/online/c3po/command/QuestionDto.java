@@ -10,15 +10,12 @@ import java.util.List;
  */
 public class QuestionDto {
     private Long id;
-
     @NotNull
     @Size(min = 1, max = 100)
     private String description;
-
     @NotNull
     @PositiveOrZero
     private Integer score;
-
     @NotEmpty
     private List<AnswerDto> answers;
 

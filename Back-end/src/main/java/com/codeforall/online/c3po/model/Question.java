@@ -6,7 +6,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * A class that represents the questions that are part of a quiz
+ * A class that represents the questions that is part of a quiz
  */
 @Entity
 @Table(name = "questions")
