@@ -63,14 +63,10 @@ This function takes in an object from the array and has a call back function - o
 
 const generateQuizCard = (questionAndAnswer, onAnswerSelect) => {
     const mainElement = document.getElementById("main");
-    //mainElement.className = "pop-up";
     mainElement.innerHTML = " ";
 
         const quizFramework = div(["quiz-framework"]);
-        //quizFramework.style.visibility = "visible"; 
-        //quizFramework.setAttribute("style", "display: flex");
-        //quizFramework.style.display = "flex";
-
+        
             const c3poContainer = div(["robot-container"]);
 
                 const robotImage = document.createElement('img');

@@ -592,7 +592,7 @@ h2 {
   justify-content: center;
   align-items: center;
   padding: 0 auto;
-  margin-top: 20%;
+  margin-top: 10%;
   width: 100%;
 }
 
@@ -604,7 +604,7 @@ h2 {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 50%;
+  width: 40%;
   color: white;
   border: 2px solid white;
   border-radius: 10px;
@@ -612,15 +612,42 @@ h2 {
   margin: 2vh;
 }
 
-.btn-container {}
+.btn-container {
+  display: flex; 
+  gap: 1rem; 
+  justify-content: center; 
+  align-items: center; 
+  margin: 2vh;
+}
 
-.btn-container .btn {
+.btn-container .replay-btn {
+  background-image: url(/assets/c3po/hello.gif);
+}
+
+.btn-container .explore-btn {
+  background-image: url(/assets/c3po/walk.gif);
+}
+
+.btn-container .replay-btn,
+.btn-container .explore-btn {
+  background-size: cover;
+  background-position: center; 
   border: 2px solid white;
   border-radius: 10px;
   font-family: starwars, sans-serif;
-  font-size: 15px;
+  font-size: 30px;
   color: white;
-  padding: 1vh;
+  padding: 1vh 2vw; 
+  cursor: pointer; /* Changes cursor to pointer for better UX */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Adds subtle shadow */
+  transition: all 0.3s ease; /* Smooth hover effect */
+}
+
+.btn-container .replay-btn:hover,
+.btn-container .explore-btn:hover {
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5); /* Deeper shadow on hover */
+  filter: brightness(1.2); /* Slightly brighten the button */
+  transform: scale(1.05); /* Adds a slight zoom effect */
 }
 
 /* Media Queries */
@@ -710,4 +737,11 @@ h2 {
   .question-content {
     font-size: 15px;
   }
+
+  .btn-container .replay-btn,
+  .btn-container .explore-btn {
+    font-size: 15px;
+    padding: 1vh 2vw; 
+
+}
 }

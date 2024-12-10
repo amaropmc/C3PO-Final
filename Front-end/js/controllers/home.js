@@ -6,6 +6,7 @@ import { getLeaderBoard } from "./leaderBoard.js";
 import { score } from "./score.js";
 
 const C3PO_URL = "http://localhost:8080/c3po/api";
+let exploreMode = false;
 
 let player = {
     username: "",
@@ -138,13 +139,14 @@ const playerExists = async (userName) => {
 
 const planets = async () => {
 
-    if(true) {
+    if(true && !exploreMode) {
     //if(allPlanetsVisited()) {
         const path = "/leaderboard";
     
         window.history.pushState({}, "", path);
     
         renderPage(path);
+        exploreMode = true;
         return;
     }
 
