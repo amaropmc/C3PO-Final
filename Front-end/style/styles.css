@@ -531,6 +531,29 @@ h2 {
     background 0.2s;
 }
 
+/**** SCORE ****/
+.result-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 auto;
+  margin-top: 5%;
+}
+
+.result-container .back-btn {
+  align-self: flex-start;
+  max-width: 50%;
+}
+
+.result-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 auto;
+  color: white;
+  font-family: starwars, sans-serif;
+}
+
 @keyframes textGlow {
   0% {
     text-shadow:

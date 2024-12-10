@@ -4,9 +4,16 @@ import { div } from "/js/views/components/commons/div.js";
 import { renderPage } from "/js/controllers/home.js";
 
 let userScore = 0;
+let currentQuizUserScore = 0;
+
 let visitedPlanets = [];
 
 export const loadQuiz = async (planetName) => {
+
+    if(currentQuizUserScore) {
+        currentQuizUserScore = 0;
+    }
+    
     let planetQuiz;
 
     const response = await fetch(GENERAL_QUIZ_URL + `/${planetName}/quiz`);
@@ -43,7 +50,7 @@ const renderQuiz = planetQuiz => {
             generateQuizCard(planetQuiz[currentQuestionIndex], showNextQuestion);
             currentQuestionIndex ++;
         } else {
-            redirectToScore(userScore);
+            redirectToScore(currentQuizUserScore);
         }
     }
 
@@ -68,7 +75,7 @@ const generateQuizCard = (questionAndAnswer, onAnswerSelect) => {
 
                 const robotImage = document.createElement('img');
                 robotImage.className = "robot-image";
-                robotImage.src = "/assets/C-3PO.jpg";
+                robotImage.src = "/assets/c3po/C-3PO.jpg";
 
                 const dialogBaloon = div(["dialog"]);
                 dialogBaloon.innerHTML= "Good luck to you!"
@@ -90,7 +97,7 @@ const generateQuizCard = (questionAndAnswer, onAnswerSelect) => {
                     backButton.addEventListener('click', () => {
                         event.preventDefault;
 
-                        redirectToScore(userScore);
+                        redirectToScore(currentQuizUserScore);
                     })
                     
                     questionHeader.appendChild(backButton);
@@ -126,13 +133,14 @@ const generateQuizCard = (questionAndAnswer, onAnswerSelect) => {
             
                     // Add a delay of 1 seconds before calling the callback
                     setTimeout(() => {
-                        onAnswerSelect();
-            
                         if (answer.correct) {
+                            ++ currentQuizUserScore;
                             userScore += questionAndAnswer.score;
                         }
             
                         console.log(userScore);
+
+                        onAnswerSelect();
                     }, 1000);
             }
         });

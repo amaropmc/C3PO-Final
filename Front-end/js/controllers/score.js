@@ -1,71 +1,62 @@
 
+import { div } from "/js/views/components/commons/div.js";
+import { renderPage } from "./home.js";
+
 const GENERAL_QUIZ_URL = "http://localhost:8080/c3po/planet/";
 
 export const score = (userScore) => {
-    const quizFramework = document.getElementById("quiz-framework");
-    quizFramework.style.display = "none"; 
-    
-    const result = document.createElement("div");
-    result.className = "result-class"; 
-
-    const resultContent = document.createElement('div');
-    resultContent.className = "result-content";
-
-    const textContainer = document.createElement('div');
-    textContainer.className = "text-container";
-
-    const resultMessage = document.createElement('div');
-    resultMessage.className = "result-message";
-
-    const imageContainer = document.createElement('div');
-    imageContainer.className = "image-container";
+    const mainElement = document.getElementById("main");
+    mainElement.innerHTML = "";
 
     const robotGif = document.createElement('img');
+    robotGif.className = "robot-gif";
+        
     let message = '';
-    if (userScore >= 3) {
-        message = `Excellent, Jedi!<br> Your score is: <br> ★★★  <br> You mastered the quiz!`;
-        robotGif.src = "./assets/c3po/dance2.gif"; 
-    } else if (userScore >= 2) {
-        message = `Good job, Jedi! <br> Your score is: <br>  ★★  <br> You did well!`;
-        robotGif.src = "./assets/c3po/r2.png"; 
-    } else if (userScore >= 1) {
-        message = `All god, Jedi! <br> Your score is: <br>  ★ <br> It will better next time!`;
-        robotGif.src = "./assets/c3po/r2.png";     
+
+    if (userScore == 3) {
+        message = `Excellent, Jedi! <br> Your score is: <br> ★★★ <br> You mastered the quiz!`;
+        robotGif.src = "/assets/c3po/dance2.gif"; 
+    } else if (userScore == 2) {
+        message = `Good job, Jedi! <br> Your score is: <br> ★★ <br> You did well!`;
+        robotGif.src = "/assets/c3po/r2.png"; 
+    } else if (userScore == 1) {
+        message = `All good, Jedi! <br> Your score is: <br> ★ <br> Better luck next time!`;
+        robotGif.src = "/assets/c3po/r2.png";     
     } else { 
         message = `Better luck next time, Jedi.<br> Your score is:<br> 0 <br> Keep practicing!`;
-        robotGif.src = "./assets/c3po/r2.png"; 
+        robotGif.src = "/assets/c3po/r2.png"; 
     }
 
-    if(visitedPlanets.lenght === 6){
-        leaderBoard();
-    }
+    const resultContainer = div(["result-container"]);
 
-    function leaderBoard(){
-        message = "You are amazing Jedi! <br> Together we learn a lot about this wonderfull universe. <br> You final score is: <br> ${userScore} "
-    }
+        const backButton = document.createElement('button');
+        backButton.className = "back-btn";
+        backButton.innerHTML = "Back";
+        backButton.onclick = () => {
+            const path = "/planet";
 
-    resultMessage.innerHTML = message;
-    robotGif.className = "robot-gif";
+            window.history.pushState({}, "", path);
 
-    textContainer.appendChild(resultMessage);
-    imageContainer.appendChild(robotGif);
-
-    resultContent.appendChild(textContainer);
-    resultContent.appendChild(imageContainer);
-
-    const backButton = document.createElement('button');
-    backButton.className = "close-btn";
-    backButton.innerHTML = "Back";
-    backButton.onclick = () => {
-        result.style.display = "none";  
-        const planets = document.getElementById("planets"); 
-        if (planets) {
-            planets.style.display = "flex";  // Show the planets again
+            renderPage(path);
         }
-    }
 
-    result.appendChild(resultContent);
-    result.appendChild(backButton);
+        resultContainer.appendChild(backButton)
 
-    document.body.appendChild(result);
+        const resultContent = div(["result-content"]);
+
+            const textContainer = div(["text-container"]);
+
+                const resultMessage = div(["result-message"]);
+                resultMessage.innerHTML = message;
+                textContainer.appendChild(resultMessage);
+            
+            resultContent.appendChild(textContainer);
+
+            const imageContainer = div(["image-container"]);
+                imageContainer.appendChild(robotGif);
+
+            resultContent.appendChild(imageContainer);
+        
+        resultContainer.appendChild(resultContent);
+    mainElement.appendChild(resultContainer);
 };
