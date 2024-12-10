@@ -1,7 +1,8 @@
 import { div } from "/js/views/components/commons/div.js";
 import { element } from "/js/views/components/commons/element.js";
 import { loadPlanets, populatePlanets } from "./planets.js";
-import { loadQuiz } from "./quiz.js";
+import { loadQuiz, allPlanetsVisited } from "./quiz.js";
+import { getLeaderBoard } from "./leaderBoard.js";
 import { score } from "./score.js";
 
 const C3PO_URL = "http://localhost:8080/c3po/api";
@@ -62,7 +63,7 @@ const home = () => {
             form.addEventListener("submit", async(event) => {
                 event.preventDefault(); 
 
-                const userName= document.getElementById("user").value.trim();
+                const userName = document.getElementById("user").value.trim();
 
                 if(!userName){
                     alert("Tell me your name, Jedi");
@@ -117,11 +118,24 @@ const playerExists = async (userName) => {
 };
 
 const planets = async () => {
+
+    if(allPlanetsVisited()) {
+        const path = "/leaderBoard";
+    
+        window.history.pushState({}, "", path);
+    
+        renderPage(path);
+    }
+
     await loadPlanets(populatePlanets);
 }
 
 const quiz = async (planetName) => {
     await loadQuiz(planetName);
+}
+
+const leaderBoard = async () => {
+    await getLeaderBoard();
 }
 
 const scorePage = (userScore) => {
@@ -147,6 +161,7 @@ const routes = [
     { path: "/", page: home },
     { path: "/planet", page: planets },
     { path: "/planet/:planetName/quiz", page: quiz },
+    { path: "/leaderboard", page: leaderBoard },
     { path: "/planet/:userScore", page: scorePage }
 ]
 

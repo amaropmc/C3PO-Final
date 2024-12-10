@@ -1,8 +1,6 @@
 const GENERAL_QUIZ_URL = "http://localhost:8080/c3po/api/planet";
 
-import{ score } from "/js/controllers/score.js";
 import { div } from "/js/views/components/commons/div.js";
-import { element } from "/js/views/components/commons/element.js";
 import { renderPage } from "/js/controllers/home.js";
 
 let userScore = 0;
@@ -152,4 +150,8 @@ const redirectToScore = (userScore) => {
     window.history.pushState({}, "", path);
 
     renderPage(path);
+}
+
+export const allPlanetsVisited = () => {
+    return visitedPlanets.length == 6 ? true : false;
 }
