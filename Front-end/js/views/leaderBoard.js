@@ -1,8 +1,7 @@
 import { element } from "/js/views/components/commons/element.js";
 import { div } from "/js/views/components/commons/div.js";
-import { renderPage } from "./home.js";
-
-const C3PO_URL = "http://localhost:8080/c3po/api";
+import { renderPage } from "../controllers/routes.js";
+import { C3PO_URL } from "../controllers/home.js";
 
 export const getLeaderBoard = async () => {
     const data = await fetch(`${C3PO_URL}/player`);

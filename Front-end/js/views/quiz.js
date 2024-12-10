@@ -1,8 +1,8 @@
-const GENERAL_QUIZ_URL = "http://localhost:8080/c3po/api/planet";
-
 import { div } from "/js/views/components/commons/div.js";
-import { renderPage } from "/js/controllers/home.js";
-import { updateUserScore } from "./home.js";
+import { renderPage } from "../controllers/routes.js";
+import { updateUserScore } from "../controllers/player.js";
+
+const GENERAL_QUIZ_URL = "http://localhost:8080/c3po/api/planet";
 
 let userScore = 0;
 let currentQuizUserScore = 0;
@@ -35,7 +35,10 @@ export const loadQuiz = async (planetName) => {
     } else {
         console.log("This planet's quiz has already been taken.");
         alert("You already prove your knowledge about this planet! Try to show me your value in another one");
-        renderPage("/planet");
+        
+        const path = "/planet";
+        window.history.pushState({}, "", path);
+        renderPage(path);
     }
 }
 

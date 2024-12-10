@@ -1,8 +1,7 @@
 
 import { div } from "/js/views/components/commons/div.js";
-import { renderPage } from "./home.js";
+import { renderPage } from "../controllers/routes.js";
 
-const GENERAL_QUIZ_URL = "http://localhost:8080/c3po/planet/";
 
 export const score = (userScore) => {
     const mainElement = document.getElementById("main");

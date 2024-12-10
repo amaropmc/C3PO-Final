@@ -1,8 +1,7 @@
 import { div } from "/js/views/components/commons/div.js";
 import { element } from "/js/views/components/commons/element.js";
-import { renderPage } from "/js/controllers/home.js";
+import { renderPage } from "../controllers/routes.js"
 
-let loadingPlanets = true;
 const PLANETS_URL = "https://swapi.dev/api/planets/";
 let planets = [];
 
@@ -20,7 +19,6 @@ export const loadPlanets = async (func) => {
   if (response.ok) {
     const data = await response.json();
     planets = data.results;
-    loadingPlanets = false;
 
     console.log(planets);
     func();
@@ -95,12 +93,6 @@ export const populatePlanets = () => {
       planetItemClassName = planetItemClassName + " planet-even";
     }
     planetItem.className = planetItemClassName;
-
-    /*planetWrapper.prepend(planetButton);
-    infoPlanetWrapper.appendChild(planetItem);
-    infoPlanetWrapper.appendChild(planetInfo);
-    planetWrapper.appendChild(infoPlanetWrapper);
-    planetContainer.appendChild(planetWrapper);*/
 
     infoPlanetWrapper.appendChild(planetItem);
     infoPlanetWrapper.appendChild(planetInfo);
