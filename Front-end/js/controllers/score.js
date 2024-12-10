@@ -30,7 +30,7 @@ export const score = (userScore) => {
     const resultContainer = div(["result-container"]);
 
         const backButton = document.createElement('button');
-        backButton.className = "back-btn";
+        backButton.className = "back-button";
         backButton.innerHTML = "Back";
         backButton.onclick = () => {
             const path = "/planet";
@@ -40,7 +40,6 @@ export const score = (userScore) => {
             renderPage(path);
         }
 
-        resultContainer.appendChild(backButton)
 
         const resultContent = div(["result-content"]);
 
@@ -52,11 +51,12 @@ export const score = (userScore) => {
             
             resultContent.appendChild(textContainer);
 
-            const imageContainer = div(["image-container"]);
+            const imageContainer = div(["image-result-container"]);
                 imageContainer.appendChild(robotGif);
 
             resultContent.appendChild(imageContainer);
         
         resultContainer.appendChild(resultContent);
+        resultContainer.appendChild(backButton)
     mainElement.appendChild(resultContainer);
 };

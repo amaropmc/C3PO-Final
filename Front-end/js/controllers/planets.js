@@ -70,7 +70,7 @@ export const populatePlanets = () => {
 
       renderPage(path);
     };
-
+    
     // planet info
     const planetInfo = div(["planet-info"]);
     planetInfo.innerHTML = `<div><span class="label">$ Name:</span> ${planet.name}</div> 
