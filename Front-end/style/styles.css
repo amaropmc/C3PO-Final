@@ -31,26 +31,26 @@ body {
   top: 0;
   left: 0;
   width: 100%;
-  color: white; 
-  padding: 1px 0; 
+  color: white;
+  padding: 1px 0;
   background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
     url(/assets/background/backgroundplanets.jpg);
   display: flex;
-  justify-content: left; 
-  align-items: center; 
-  z-index: 10; 
+  justify-content: left;
+  align-items: center;
+  z-index: 10;
   height: fit-content;
 }
 
 .footer-content {
   display: flex;
-  justify-content: space-evenly; 
-  width: 100%; 
-  text-align: center; 
+  justify-content: space-evenly;
+  width: 100%;
+  text-align: center;
 }
 
 .site-footer p {
-  font-size: 0.7rem; 
+  font-size: 0.7rem;
   color: #fff;
 }
 
@@ -61,9 +61,10 @@ body {
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  max-width: 65%;
+  width: 65vw;
   gap: 1rem;
-  justify-content: flex-end; 
+  justify-content: flex-end;
+  height: 95vh;
 }
 
 .title-container {
@@ -180,10 +181,11 @@ body {
   top: 0;
   right: 0;
   height: 100vh;
-  display: flex; 
-  justify-content: flex-end; 
-  align-items: center; 
-  z-index: -1; 
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  z-index: -1;
+  width: 39vw;
 }
 
 .image-robot-container img {
@@ -193,21 +195,21 @@ body {
 
 @keyframes textGlow {
   0% {
-    text-shadow: 
-      0 0 5px #ffcc00, 
-      0 0 10px #ffcc00, 
+    text-shadow:
+      0 0 5px #ffcc00,
+      0 0 10px #ffcc00,
       0 0 20px #ffcc00;
   }
   50% {
-    text-shadow: 
-      0 0 20px #ffcc00, 
-      0 0 30px #ffcc00, 
+    text-shadow:
+      0 0 20px #ffcc00,
+      0 0 30px #ffcc00,
       0 0 40px #ffcc00;
   }
   100% {
-    text-shadow: 
-      0 0 5px #ffcc00, 
-      0 0 10px #ffcc00, 
+    text-shadow:
+      0 0 5px #ffcc00,
+      0 0 10px #ffcc00,
       0 0 20px #ffcc00;
   }
 }
@@ -389,8 +391,6 @@ h2 {
   top: -28px;
 }
 
-
-
 /* Animations*/
 
 @keyframes planetRotate {
@@ -443,12 +443,10 @@ h2 {
   }
 }
 
-
 .planet-button:disabled {
-  background-color: gray; 
-  cursor: not-allowed;    
+  background-color: gray;
+  cursor: not-allowed;
 }
-
 
 /**** QUIZ ****/
 
@@ -480,7 +478,8 @@ h2 {
     135deg,
     rgba(250, 243, 224, 0.1),
     rgba(240, 200, 140, 0.5),
-    #e6be8a);
+    #e6be8a
+  );
   align-self: center;
   text-align: center;
   border-radius: 10px;
@@ -489,8 +488,7 @@ h2 {
   margin-top: 0%;
   width: 90%;
   font-size: 30px;
-  animation:
-    textGlow 2s ease-in-out infinite;
+  animation: textGlow 2s ease-in-out infinite;
 }
 
 .quiz-container {
@@ -519,20 +517,26 @@ h2 {
 .back-btn {
   font-family: starwars;
   font-size: 10px;
-  background: linear-gradient(90deg, rgba(30, 58, 138, 0.7), rgba(59, 130, 246, 0.7));
+  background: linear-gradient(
+    90deg,
+    rgba(30, 58, 138, 0.7),
+    rgba(59, 130, 246, 0.7)
+  );
   border: none;
-  color: white; 
-  padding: 15px 32px; 
-  text-align: center; 
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
   font-size: 16px;
-  border-radius: 8px; 
+  border-radius: 8px;
   cursor: pointer;
-  transition: background-color 0.3s, transform 0.2s;
+  transition:
+    background-color 0.3s,
+    transform 0.2s;
 }
 
 .btn-estilizado:hover {
   background-color: #080473;
-  transform: scale(1.05); 
+  transform: scale(1.05);
 }
 
 .question-header {
@@ -543,7 +547,7 @@ h2 {
   max-height: 20%;
 }
 
-.question-header{
+.question-header {
   font-family: starwars;
   font-size: 10px;
   text-align: start;
@@ -610,7 +614,6 @@ h2 {
   width: 100%;
 }
 
-
 .result-content {
   display: flex;
   justify-content: space-evenly;
@@ -631,36 +634,37 @@ h2 {
   background-image: url("/assets/planets/Tatooine.jpeg");
   background-size: cover;
   border-radius: 60%;
-  animation: changeBackground 10s infinite, rotateBackground 10s linear infinite; 
+  animation:
+    changeBackground 10s infinite,
+    rotateBackground 10s linear infinite;
 }
 
 @keyframes rotateBackground {
   0% {
-      background-position: 0 0;
+    background-position: 0 0;
   }
   100% {
-      background-position: 100% 100%;
+    background-position: 100% 100%;
   }
 }
 
 @keyframes changeBackground {
   0% {
-      background-image: url("/assets/planets/Alderaan.jpeg");
+    background-image: url("/assets/planets/Alderaan.jpeg");
   }
   33% {
-      background-image: url("/assets/planets/Bespin.jpeg");
+    background-image: url("/assets/planets/Bespin.jpeg");
   }
   50% {
-      background-image: url("/assets/planets/Dagobah.jpeg"); 
+    background-image: url("/assets/planets/Dagobah.jpeg");
   }
   66% {
-      background-image: url("/assets/planets/Endor.jpeg");
+    background-image: url("/assets/planets/Endor.jpeg");
   }
   100% {
-      background-image: url("/assets/planets/Hoth.jpeg");
+    background-image: url("/assets/planets/Hoth.jpeg");
   }
 }
-
 
 .result-content .result-message {
   font-size: 50px;
@@ -668,24 +672,22 @@ h2 {
   text-align: center;
 }
 
-
 .result-content img {
   max-width: 300px;
   border-radius: 50px;
   object-fit: cover;
 }
 
-
 .back-button {
   background-size: cover;
-  background-position: center; 
+  background-position: center;
   border: 2px solid white;
   border-radius: 20px;
   font-family: starwars, sans-serif;
   font-size: 30px;
   color: rgb(255, 255, 255);
-  padding: 1vh 2vw; 
-  cursor: pointer; 
+  padding: 1vh 2vw;
+  cursor: pointer;
   background-image: url(/assets/c3po/hello.gif);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
   transition: all 0.3s ease;
@@ -693,11 +695,10 @@ h2 {
 
 .btn-container .replay-btn:hover,
 .btn-container .explore-btn:hover {
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5); 
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
   filter: brightness(1.2);
-  transform: scale(1.05); 
+  transform: scale(1.05);
 }
-
 
 /**** LEADERBOARD ***/
 
@@ -728,10 +729,10 @@ h2 {
 }
 
 .btn-container {
-  display: flex; 
-  gap: 1rem; 
-  justify-content: center; 
-  align-items: center; 
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
   margin: 2vh;
 }
 
@@ -746,13 +747,13 @@ h2 {
 .btn-container .replay-btn,
 .btn-container .explore-btn {
   background-size: cover;
-  background-position: center; 
+  background-position: center;
   border: 2px solid white;
   border-radius: 10px;
   font-family: starwars, sans-serif;
   font-size: 30px;
   color: white;
-  padding: 1vh 2vw; 
+  padding: 1vh 2vw;
   cursor: pointer; /* Changes cursor to pointer for better UX */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Adds subtle shadow */
   transition: all 0.3s ease; /* Smooth hover effect */
@@ -836,7 +837,6 @@ h2 {
     font-size: 4vw;
   }
 
-
   .question-header .counter {
     font-size: 10px;
   }
@@ -856,17 +856,16 @@ h2 {
   .btn-container .replay-btn,
   .btn-container .explore-btn {
     font-size: 15px;
-    padding: 1vh 2vw; 
-
-}
-@media (max-width: 768px) {
-  .result-content {
-    flex-direction: column;
-    gap: 20px;
+    padding: 1vh 2vw;
   }
-  .image-result-container {
-    width: 100%;
-    height: auto;
+  @media (max-width: 768px) {
+    .result-content {
+      flex-direction: column;
+      gap: 20px;
+    }
+    .image-result-container {
+      width: 100%;
+      height: auto;
+    }
   }
-}
 }
