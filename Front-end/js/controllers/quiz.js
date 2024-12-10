@@ -29,9 +29,11 @@ export const loadQuiz = async (planetName) => {
     if(!visitedPlanets.includes(planetName)) {
         renderQuiz(planetQuiz);
         console.log(planetQuiz);
+        const path = `/planet/${planetName}/quiz`;
         visitedPlanets.push(planetName);
     } else {
         console.log("This planet's quiz has already been taken.");
+        alert("You already prove your knowledge about this planet! Try to show me your value in another one");
         renderPage("/planet");
     }
 }

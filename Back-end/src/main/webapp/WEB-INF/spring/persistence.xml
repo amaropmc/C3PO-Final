@@ -12,8 +12,8 @@
         <!-- connection credentials -->
         <property name="driverClass" value="org.postgresql.Driver"/>
         <property name="jdbcUrl" value="jdbc:postgresql://localhost/c3po?useSSL=false"/>
-        <property name="user" value="pedro"/>
-        <property name="password" value="248966006"/>
+        <property name="user" value="carina"/>
+        <property name="password" value="carina"/>
 
         <!-- c3p0 database connection pool management properties -->
         <property name="minPoolSize" value="1"/>
