@@ -139,8 +139,7 @@ const playerExists = async (userName) => {
 
 const planets = async () => {
 
-    if(true && !exploreMode) {
-    //if(allPlanetsVisited()) {
+    if(allPlanetsVisited() && !exploreMode) {
         const path = "/leaderboard";
     
         window.history.pushState({}, "", path);
