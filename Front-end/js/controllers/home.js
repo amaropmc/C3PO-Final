@@ -140,6 +140,9 @@ const playerExists = async (userName) => {
 const planets = async () => {
 
     if(allPlanetsVisited() && !exploreMode) {
+
+        await postNewPlayer(player);
+
         const path = "/leaderboard";
     
         window.history.pushState({}, "", path);
@@ -186,6 +189,29 @@ const routes = [
     { path: "/leaderboard", page: leaderBoard },
     { path: "/planet/:userScore", page: scorePage }
 ]
+
+export const updateUserScore = (newScore) => {
+    player.score = newScore;
+    console.log(player.score);
+}
+
+const postNewPlayer = async (player) => {
+    try {
+        const response = await fetch(`${C3PO_URL}/player/add`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(player)
+        })
+    
+        if (!response.ok) {
+            throw new Error(`HTTP error status: ${response.status}`);
+        }
+    } catch (error) {
+    console.error('Error making POST request:', error);
+    }
+}
 
 renderPage(document.location.pathname);
 

@@ -2,6 +2,7 @@ const GENERAL_QUIZ_URL = "http://localhost:8080/c3po/api/planet";
 
 import { div } from "/js/views/components/commons/div.js";
 import { renderPage } from "/js/controllers/home.js";
+import { updateUserScore } from "./home.js";
 
 let userScore = 0;
 let currentQuizUserScore = 0;
@@ -132,6 +133,7 @@ const generateQuizCard = (questionAndAnswer, onAnswerSelect) => {
                         if (answer.correct) {
                             ++ currentQuizUserScore;
                             userScore += questionAndAnswer.score;
+                            updateUserScore(userScore);
                         }
             
                         console.log(userScore);

@@ -61,9 +61,6 @@ export const populatePlanets = () => {
     planetButton.onclick = (event) => {
       event.preventDefault();
 
-      //Small typo on the DB, workaround that works!
-      if (planet.name === "Tatooine") planet.name = "Tattoine";
-
       const path = `/planet/${planet.name}/quiz`;
 
       window.history.pushState({}, "", path);

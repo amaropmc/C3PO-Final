@@ -12,6 +12,8 @@ export const getLeaderBoard = async () => {
 }
 
 const renderLeaderBoard = (players) => {
+    console.log(players);
+
     const mainElement = document.getElementById("main");
     mainElement.innerHTML = "";
 
@@ -20,20 +22,20 @@ const renderLeaderBoard = (players) => {
         const title = element('h1', ["leader-board-title"], "top 5 jedi");
         boardContainer.appendChild(title);
 
-        players.forEach(player => {
+        for (let i = 0; (i < players.length && i < 5); i++) {
             const playerCard = div(["leader-board-playerCard"]);
             
                 const playerName = div(["leader-board-usernames"]);
-                playerName.innerHTML = player.username;
+                playerName.innerHTML = players[i].username;
 
                 const playerTotalScore = div(["leader-board-scores"]);
-                playerTotalScore.innerHTML = player.score;
+                playerTotalScore.innerHTML = players[i].score;
 
                 playerCard.appendChild(playerName);
                 playerCard.appendChild(playerTotalScore);
             
             boardContainer.appendChild(playerCard);
-        });
+        };
     
         const buttonContainer = div(["btn-container"]);
 
