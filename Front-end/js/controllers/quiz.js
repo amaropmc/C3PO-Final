@@ -45,7 +45,7 @@ const renderQuiz = planetQuiz => {
             generateQuizCard(planetQuiz[currentQuestionIndex], showNextQuestion);
             currentQuestionIndex ++;
         } else {
-            score(userScore);
+            redirectToScore(userScore);
         }
     }
 
@@ -86,7 +86,14 @@ const generateQuizCard = (questionAndAnswer, onAnswerSelect) => {
     
                 const questionHeader = div(["question-header"]);
     
-                    const backButton = element("button", ["back-btn"], "back");
+                    const backButton = document.createElement('button');
+                    backButton.className = "back-btn";
+                    backButton.innerHTML = "back";
+                    backButton.addEventListener('click', () => {
+                        event.preventDefault;
+
+                        redirectToScore(userScore);
+                    })
                     
                     questionHeader.appendChild(backButton);
 
@@ -137,4 +144,12 @@ const generateQuizCard = (questionAndAnswer, onAnswerSelect) => {
 
         quizFramework.appendChild(quizContainer);
     mainElement.appendChild(quizFramework);    
-} 
+}
+
+const redirectToScore = (userScore) => {
+    const path = `/planet/${userScore}`;
+
+    window.history.pushState({}, "", path);
+
+    renderPage(path);
+}

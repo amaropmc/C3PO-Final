@@ -2,6 +2,7 @@ import { div } from "/js/views/components/commons/div.js";
 import { element } from "/js/views/components/commons/element.js";
 import { loadPlanets, populatePlanets } from "./planets.js";
 import { loadQuiz } from "./quiz.js";
+import { score } from "./score.js";
 
 const C3PO_URL = "http://localhost:8080/c3po/api";
 
@@ -123,6 +124,10 @@ const quiz = async (planetName) => {
     await loadQuiz(planetName);
 }
 
+const scorePage = (userScore) => {
+    score(userScore);
+}
+
 export const renderPage = (path) => {
     const route = routes.find(r => {
         const match = path.match(new RegExp(`^${r.path.replace(/:\w+/g, "(\\w+)")}$`)); // Capture dynamic parts
@@ -141,10 +146,12 @@ export const renderPage = (path) => {
 const routes = [
     { path: "/", page: home },
     { path: "/planet", page: planets },
-    { path: "/planet/:planetName/quiz", page: quiz }
+    { path: "/planet/:planetName/quiz", page: quiz },
+    { path: "/planet/:userScore", page: scorePage }
 ]
 
-window.onload = () => {
-    renderPage("/");
-}
+renderPage(document.location.pathname);
 
+window.addEventListener('popstate', () => {
+    renderPage(document.location.pathname);
+})
