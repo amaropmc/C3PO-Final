@@ -16,8 +16,8 @@ const renderLeaderBoard = (players) => {
 
     const boardContainer = div(["leader-board-container"]);
     
-        const title = element(h1, ["leader-board-title"], "top 10 jedi");
-        boardContainer.appenderChild(title);
+        const title = element('h1', ["leader-board-title"], "top 10 jedi");
+        boardContainer.appendChild(title);
 
         players.forEach(player => {
             const playerCard = div(["leader-board-playerCard"]);
@@ -27,9 +27,27 @@ const renderLeaderBoard = (players) => {
 
                 const playerTotalScore = div(["leader-board-scores"]);
                 playerTotalScore.innerHTML = player.score;
+
+                playerCard.appendChild(playerName);
+                playerCard.appendChild(playerTotalScore);
             
-                boardContainer.appenderChild(playerCard);
+            boardContainer.appendChild(playerCard);
         });
     
-        mainElement.appendChild(boardContainer);
+        const buttonContainer = div(["btn-container"]);
+
+            const replayBtn = document.createElement('button');
+            replayBtn.className = "btn";
+            replayBtn.innerHTML = "homepage";
+
+            buttonContainer.appendChild(replayBtn);
+
+            const exploreBtn = document.createElement('button');
+            exploreBtn.className = "btn";
+            exploreBtn.innerHTML = "explore!";
+
+            buttonContainer.appendChild(exploreBtn);
+
+        boardContainer.appendChild(buttonContainer);
+    mainElement.appendChild(boardContainer);
 }

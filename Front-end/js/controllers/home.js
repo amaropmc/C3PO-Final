@@ -138,12 +138,14 @@ const playerExists = async (userName) => {
 
 const planets = async () => {
 
-    if(allPlanetsVisited()) {
+    if(true) {
+    //if(allPlanetsVisited()) {
         const path = "/leaderboard";
     
         window.history.pushState({}, "", path);
     
         renderPage(path);
+        return;
     }
 
     await loadPlanets(populatePlanets);
