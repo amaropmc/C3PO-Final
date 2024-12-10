@@ -3,6 +3,6 @@
   <component name="DiffGenerationConfig" isInitGenerateDdl="true">
     <option name="initGenerateDdl" value="true" />
     <option name="sourceModelValue" value="C3PO-final:C3PO-final" />
-    <option name="targetDbValue" value="1df87f59-2e44-4d47-9b82-a8856a3914e9" />
+    <option name="targetDbValue" value="c9d1c5e7-a75e-4be4-b111-b9ccc6b165a2" />
   </component>
 </project>
