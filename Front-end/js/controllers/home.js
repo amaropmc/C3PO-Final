@@ -1,10 +1,17 @@
 import { div } from "/js/views/components/commons/div.js";
 import { element } from "/js/views/components/commons/element.js";
 import { loadPlanets, populatePlanets } from "./planets.js";
-import { loadQuiz } from "./quiz.js";
+import { loadQuiz, allPlanetsVisited } from "./quiz.js";
+import { getLeaderBoard } from "./leaderBoard.js";
 import { score } from "./score.js";
 
 const C3PO_URL = "http://localhost:8080/c3po/api";
+let exploreMode = false;
+
+let player = {
+    username: "",
+    score: 0
+}
 
 const home = () => {
     const container = document.getElementById("main");
@@ -59,27 +66,41 @@ const home = () => {
             form.appendChild(submitButton);
 
             // Form submit handler
-            form.addEventListener("submit", async(event) => {
-                event.preventDefault(); 
-
-                const userName= document.getElementById("user").value.trim();
-
-                if(!userName){
-                    alert("Tell me your name, Jedi");
-                    return;
-                }
-
-                try{
-                    const exists = await playerExists(userName);
-                    if (exists){
-                        alert("This name is not part of our planet. Please choose another.");
-                        return;
-                    }      
-
+            form.addEventListener("submit", async (event) => {
+                event.preventDefault();
+            
+                const sessionPlayerUsername = player.username;
+                console.log("Current session username:", sessionPlayerUsername);
+            
+                if (sessionPlayerUsername) {
+                    alert(`Username already picked, proceeding as ${sessionPlayerUsername}`);
+            
                     const path = "/planet";
                     window.history.pushState({}, '', path);
                     renderPage(path);
-                
+                    return; 
+                }
+            
+                const inputUsername = document.getElementById("user").value.trim();
+                console.log("Input username:", inputUsername);
+            
+                if (!inputUsername) {
+                    alert("Tell me your name, Jedi");
+                    return;
+                }
+            
+                try {
+                    const exists = await playerExists(inputUsername);
+                    if (exists) {
+                        alert("This name is not part of our planet. Please choose another.");
+                        return;
+                    }
+            
+                    player.username = inputUsername;
+            
+                    const path = "/planet";
+                    window.history.pushState({}, '', path);
+                    renderPage(path);
                 } catch (error) {
                     console.error("Error checking username existence:", error.message);
                     alert("An error occurred while processing your request. Please try again.");
@@ -94,7 +115,7 @@ const home = () => {
     //Image container
     const imageContainer = div(["image-robot-container"]);
         const image = document.createElement("img");
-        image.src = "/assets/C-3PO.jpg";
+        image.src = "/assets/c3po/C-3PO.jpg";
         image.alt = "C-3PO robot";
 
         imageContainer.appendChild(image);
@@ -117,11 +138,27 @@ const playerExists = async (userName) => {
 };
 
 const planets = async () => {
+
+    if(true && !exploreMode) {
+    //if(allPlanetsVisited()) {
+        const path = "/leaderboard";
+    
+        window.history.pushState({}, "", path);
+    
+        renderPage(path);
+        exploreMode = true;
+        return;
+    }
+
     await loadPlanets(populatePlanets);
 }
 
 const quiz = async (planetName) => {
     await loadQuiz(planetName);
+}
+
+const leaderBoard = async () => {
+    await getLeaderBoard();
 }
 
 const scorePage = (userScore) => {
@@ -147,6 +184,7 @@ const routes = [
     { path: "/", page: home },
     { path: "/planet", page: planets },
     { path: "/planet/:planetName/quiz", page: quiz },
+    { path: "/leaderboard", page: leaderBoard },
     { path: "/planet/:userScore", page: scorePage }
 ]
 

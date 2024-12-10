@@ -531,6 +531,29 @@ h2 {
     background 0.2s;
 }
 
+/**** SCORE ****/
+.result-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 auto;
+  margin-top: 5%;
+}
+
+.result-container .back-btn {
+  align-self: flex-start;
+  max-width: 50%;
+}
+
+.result-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 auto;
+  color: white;
+  font-family: starwars, sans-serif;
+}
+
 @keyframes textGlow {
   0% {
     text-shadow:
@@ -559,6 +582,72 @@ h2 {
   100% {
     transform: translateX(0);
   }
+}
+
+/**** LEADERBOARD ***/
+
+.leader-board-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0 auto;
+  margin-top: 10%;
+  width: 100%;
+}
+
+.leader-board-title {
+  margin-bottom: 2vh;
+}
+
+.leader-board-playerCard {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 40%;
+  color: white;
+  border: 2px solid white;
+  border-radius: 10px;
+  padding: 2vh;
+  margin: 2vh;
+}
+
+.btn-container {
+  display: flex; 
+  gap: 1rem; 
+  justify-content: center; 
+  align-items: center; 
+  margin: 2vh;
+}
+
+.btn-container .replay-btn {
+  background-image: url(/assets/c3po/hello.gif);
+}
+
+.btn-container .explore-btn {
+  background-image: url(/assets/c3po/walk.gif);
+}
+
+.btn-container .replay-btn,
+.btn-container .explore-btn {
+  background-size: cover;
+  background-position: center; 
+  border: 2px solid white;
+  border-radius: 10px;
+  font-family: starwars, sans-serif;
+  font-size: 30px;
+  color: white;
+  padding: 1vh 2vw; 
+  cursor: pointer; /* Changes cursor to pointer for better UX */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Adds subtle shadow */
+  transition: all 0.3s ease; /* Smooth hover effect */
+}
+
+.btn-container .replay-btn:hover,
+.btn-container .explore-btn:hover {
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5); /* Deeper shadow on hover */
+  filter: brightness(1.2); /* Slightly brighten the button */
+  transform: scale(1.05); /* Adds a slight zoom effect */
 }
 
 /* Media Queries */
@@ -648,4 +737,11 @@ h2 {
   .question-content {
     font-size: 15px;
   }
+
+  .btn-container .replay-btn,
+  .btn-container .explore-btn {
+    font-size: 15px;
+    padding: 1vh 2vw; 
+
+}
 }

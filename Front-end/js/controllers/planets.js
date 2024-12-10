@@ -28,6 +28,7 @@ export const loadPlanets = async (func) => {
 };
 
 export const populatePlanets = () => {
+
   const mainElement = document.getElementById("main");
   mainElement.innerHTML = "";
 
@@ -59,6 +60,9 @@ export const populatePlanets = () => {
     const planetButton = element("button", ["planet-button"], "Take quiz");
     planetButton.onclick = (event) => {
       event.preventDefault();
+
+      //Small typo on the DB, workaround that works!
+      if (planet.name === "Tatooine") planet.name = "Tattoine";
 
       const path = `/planet/${planet.name}/quiz`;
 
