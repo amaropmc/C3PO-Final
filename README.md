@@ -8,7 +8,7 @@ May the force be with you!
 
 ## Languages and technologies
 
-HTML, CSS, JavaScript, REST API, Java, Spring MVC.
+HTML, CSS, JavaScript, REST API, Java, Spring, PostgresSQL
 
 ## Project Management and Collaboration tools
 
