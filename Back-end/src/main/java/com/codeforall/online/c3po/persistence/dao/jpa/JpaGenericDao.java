@@ -46,10 +46,10 @@ public abstract class JpaGenericDao<T extends Model> implements Dao<T> {
     }
 
     /**
-     * @see Dao#findById(long)
+     * @see Dao#findById(Long)
      */
     @Override
-    public T findById(long id) {
+    public T findById(Long id) {
         EntityManager em = sm.getCurrentSession();
 
         return em.find(modelType, id);
@@ -66,10 +66,10 @@ public abstract class JpaGenericDao<T extends Model> implements Dao<T> {
     }
 
     /**
-     * @see Dao#delete(long)
+     * @see Dao#delete(Long)
      */
     @Override
-    public void delete(long id) {
+    public void delete(Long id) {
         EntityManager em = sm.getCurrentSession();
 
         em.remove(em.find(modelType, id));

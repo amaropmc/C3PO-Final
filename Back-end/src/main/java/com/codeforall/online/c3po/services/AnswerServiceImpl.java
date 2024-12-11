@@ -22,7 +22,7 @@ public class AnswerServiceImpl  implements AnswerService {
      * @throws AnswerNotFoundException
      */
     @Override
-    public Answer getAnswerById(long answerId) throws AnswerNotFoundException {
+    public Answer getAnswerById(Long answerId) throws AnswerNotFoundException {
         return Optional.ofNullable(answerDao.findById(answerId))
                 .orElseThrow(AnswerNotFoundException::new);
     }

@@ -1,6 +1,5 @@
 package com.codeforall.online.c3po.controller;
 
-import com.codeforall.online.c3po.command.PlanetDto;
 import com.codeforall.online.c3po.command.PlayerDto;
 import com.codeforall.online.c3po.converters.PlayerDtoToPlayer;
 import com.codeforall.online.c3po.converters.PlayerToPlayerDto;

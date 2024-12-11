@@ -4,6 +4,8 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 
+import java.util.Objects;
+
 /**
  * Class that represents a player
  */
@@ -44,5 +46,27 @@ public class Player extends AbstractModel{
      */
     public void setTotalScore(Integer totalScore) {
         this.totalScore = totalScore;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+
+        if (!(o instanceof Player player)) {
+            return false;
+        }
+
+        if (!super.equals(o)){
+            return false;
+        }
+
+        return Objects.equals(username, player.username);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash((Integer)super.hashCode(), username);
     }
 }

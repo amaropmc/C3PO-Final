@@ -44,13 +44,14 @@ public class JpaPlayerGenericDao extends JpaGenericDao<Player> implements Player
     public Player findByUsername(String username) throws PlayerNotFoundException {
         EntityManager em = sm.getCurrentSession();
 
-        CriteriaBuilder cb = em.getCriteriaBuilder();
-        CriteriaQuery<Player> criteriaQuery = cb.createQuery(Player.class);
-        Root<Player> root = criteriaQuery.from(Player.class);
-        criteriaQuery.select(root);
-        criteriaQuery.where(cb.equal(root.get("username"), username));
-
         try {
+            CriteriaBuilder cb = em.getCriteriaBuilder();
+            CriteriaQuery<Player> criteriaQuery = cb.createQuery(Player.class);
+            Root<Player> root = criteriaQuery.from(Player.class);
+            criteriaQuery.select(root);
+            criteriaQuery.where(cb.equal(root.get("username"), username));
+
+
             return em.createQuery(criteriaQuery).getSingleResult();
 
         } catch (NoResultException e) {

@@ -19,7 +19,7 @@ public interface PlanetService {
      * @return the planet
      * @throws PlanetNotFoundException
      */
-    Planet getPlanetById(long id) throws PlanetNotFoundException;
+    Planet getPlanetById(Long id) throws PlanetNotFoundException;
 
     /**
      * Retrieves a planet by its name
@@ -47,7 +47,7 @@ public interface PlanetService {
      * Removes a planet
      * @param planetId the id of the planet to be removed
      */
-    void remove(long planetId);
+    void remove(Long planetId);
 
     /**
      * Retrieves all the planet's questions' Ids
@@ -55,7 +55,7 @@ public interface PlanetService {
      * @return a set of questions' id
      * @throws PlanetNotFoundException
      */
-    Set<Long> getQuestionsIds(long planetId) throws PlanetNotFoundException;
+    Set<Long> getQuestionsIds(Long planetId) throws PlanetNotFoundException;
 
     /**
      * Adds a question to one planet
@@ -64,7 +64,7 @@ public interface PlanetService {
      * @return the added question
      * @throws PlanetNotFoundException
      */
-    Question addQuestion(long planetId, Question question) throws PlanetNotFoundException;
+    Question addQuestion(Long planetId, Question question) throws PlanetNotFoundException;
 
     /**
      * Removes a question from a planet
@@ -73,5 +73,5 @@ public interface PlanetService {
      * @throws PlanetNotFoundException
      * @throws QuestionNotFoundException
      */
-    void removeQuestion(long planetId, long questionId) throws PlanetNotFoundException, QuestionNotFoundException;
+    void removeQuestion(Long planetId, Long questionId) throws PlanetNotFoundException, QuestionNotFoundException;
 }

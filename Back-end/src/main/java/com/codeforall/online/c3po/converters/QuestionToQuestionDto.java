@@ -17,8 +17,6 @@ import java.util.stream.Collectors;
 @Component
 public class QuestionToQuestionDto extends AbstractConverter<Question, QuestionDto> {
 
-    private QuestionService questionService;
-    private AnswerService answerService;
     private AnswerToAnswerDTO answerToAnswerDTO;
 
     /**
@@ -38,24 +36,6 @@ public class QuestionToQuestionDto extends AbstractConverter<Question, QuestionD
         questionDto.setAnswers(answers);
 
         return questionDto;
-    }
-
-    /**
-     * Set the question service
-     * @param questionService the questions service to set
-     */
-    @Autowired
-    public void setQuestionService(QuestionService questionService) {
-        this.questionService = questionService;
-    }
-
-    /**
-     * Set the answer service
-     * @param answerService the answer service to set
-     */
-    @Autowired
-    public void setAnswerService(AnswerService answerService) {
-        this.answerService = answerService;
     }
 
     /**

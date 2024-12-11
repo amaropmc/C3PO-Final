@@ -22,10 +22,7 @@ public class PlayerServiceImpl implements PlayerService {
     private Player player;
 
     /**
-     * Get the user by username
-     *
-     * @param username
-     * @return
+     * @see PlayerService#getPlayer(String)
      */
     @Override
     public Player getPlayer(String username) throws PlayerNotFoundException {
@@ -44,10 +41,7 @@ public class PlayerServiceImpl implements PlayerService {
     }
 
     /**
-     * register the user with username
-     *
-     * @param username
-     * @return
+     * @see PlayerService#registerPlayer(String, Integer)
      */
     @Override
     public Player registerPlayer(String username, Integer score) {
@@ -75,12 +69,10 @@ public class PlayerServiceImpl implements PlayerService {
         return player;
     }
 
+    /*
     /**
-     * login?
-     *
-     * @param username
-     * @return
-     */
+     * @see PlayerService#authenticate(String)
+
     @Override
     public boolean authenticate(String username) {
         if (username == null || username.isEmpty()) {
@@ -106,10 +98,10 @@ public class PlayerServiceImpl implements PlayerService {
             return false;
         }
     }
+     */
 
     /**
-     * @param username
-     * @return
+     * @see PlayerService#getTotalScore(String)
      */
     @Override
     public int getTotalScore(String username) throws PlayerNotFoundException {
@@ -123,14 +115,10 @@ public class PlayerServiceImpl implements PlayerService {
     }
 
     /**
-     * update the user's score
-     *
-     * @param username
-     * @param newScore
-     * @return
+     * @see PlayerService#updatePlayerScore(String, Integer)
      */
     @Override
-    public boolean updatePlayerScore(String username, int newScore) throws PlayerNotFoundException {
+    public boolean updatePlayerScore(String username, Integer newScore) throws PlayerNotFoundException {
         player = playerDao.findByUsername(username);
 
         if(player == null) {
@@ -155,6 +143,10 @@ public class PlayerServiceImpl implements PlayerService {
         return true;
     }
 
+    /**
+     * @see PlayerService#deletePlayer(String)
+     */
+    @Override
     public void deletePlayer(String username) throws PlayerNotFoundException {
         player = playerDao.findByUsername(username);
 
@@ -173,11 +165,19 @@ public class PlayerServiceImpl implements PlayerService {
         }
     }
 
+    /**
+     * Set the player data acess object
+     * @param playerDao the player DAO to set
+     */
     @Autowired
     public void setPlayerDao(PlayerDao playerDao) {
         this.playerDao = playerDao;
     }
 
+    /**
+     * Set the transaction manager
+     * @param transactionManager the transaction manager to set
+     */
     @Autowired
     public void setTransactionManager(TransactionManager transactionManager) {
         this.transactionManager = transactionManager;

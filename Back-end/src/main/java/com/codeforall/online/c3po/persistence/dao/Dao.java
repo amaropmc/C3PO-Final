@@ -21,7 +21,7 @@ public interface Dao<T extends Model> {
      * @param id the model id
      * @return the model
      */
-    T findById(long id);
+    T findById(Long id);
 
     /**
      * Save or updates the model
@@ -34,5 +34,5 @@ public interface Dao<T extends Model> {
      * Delete the model
      * @param id the id of the model to be deleted
      */
-    void delete(long id);
+    void delete(Long id);
 }

@@ -35,7 +35,7 @@ public class JpaSessionManager implements SessionManager<EntityManager> {
     }
 
     /**
-     * Get the curent session
+     * Get the current session
      *
      * @return the current session
      */

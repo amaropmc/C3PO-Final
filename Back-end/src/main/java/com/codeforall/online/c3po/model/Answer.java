@@ -4,6 +4,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
+import java.util.Objects;
+
 /**
  * A class that represents an answer to a question of the quiz
  */
@@ -11,7 +13,7 @@ import jakarta.persistence.Table;
 @Table(name = "answers")
 public class Answer extends AbstractModel {
     private String description;
-    private boolean correct;
+    private Boolean correct;
     @ManyToOne
     private Question question;
 
@@ -43,7 +45,7 @@ public class Answer extends AbstractModel {
      * Set the answer correctness
      * @param correct either true or false
      */
-    public void setCorrect(boolean correct) {
+    public void setCorrect(Boolean correct) {
         this.correct = correct;
     }
 
@@ -61,5 +63,28 @@ public class Answer extends AbstractModel {
      */
     public void setQuestion(Question question) {
         this.question = question;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+
+        if (!(o instanceof Answer answer)) {
+            return false;
+        }
+        if (!super.equals(o)) {
+            return false;
+        }
+
+        return correct == answer.correct &&
+                Objects.equals(description, answer.description) &&
+                Objects.equals(question, answer.question);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash((Integer)super.hashCode(), description, correct, question);
     }
 }

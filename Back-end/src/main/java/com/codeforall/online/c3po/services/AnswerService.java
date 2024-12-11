@@ -16,7 +16,7 @@ public interface AnswerService {
      * @return
      * @throws AnswerNotFoundException
      */
-    Answer getAnswerById(long answerId) throws AnswerNotFoundException;
+    Answer getAnswerById(Long answerId) throws AnswerNotFoundException;
 
     /**
      * Retrieves a list of all registered answers

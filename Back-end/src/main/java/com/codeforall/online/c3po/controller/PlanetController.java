@@ -1,15 +1,11 @@
 package com.codeforall.online.c3po.controller;
 
 import com.codeforall.online.c3po.command.PlanetDto;
-import com.codeforall.online.c3po.command.PlayerDto;
 import com.codeforall.online.c3po.converters.PlanetDtoToPlanet;
 import com.codeforall.online.c3po.converters.PlanetToPlanetDto;
 import com.codeforall.online.c3po.exceptions.PlanetAlreadyExistsException;
 import com.codeforall.online.c3po.exceptions.PlanetNotFoundException;
-import com.codeforall.online.c3po.exceptions.PlayerAlreadyExistsException;
-import com.codeforall.online.c3po.exceptions.PlayerNotFoundException;
 import com.codeforall.online.c3po.model.Planet;
-import com.codeforall.online.c3po.model.Player;
 import com.codeforall.online.c3po.services.PlanetService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;

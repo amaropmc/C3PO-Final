@@ -27,10 +27,10 @@ public class QuestionServiceImpl implements QuestionService {
     private AnswerDao answerDao;
 
     /**
-     * @see QuestionService#getQuestionById(long)
+     * @see QuestionService#getQuestionById(Long)
      */
     @Override
-    public Question getQuestionById(long questionId) throws QuestionNotFoundException{
+    public Question getQuestionById(Long questionId) throws QuestionNotFoundException{
         return Optional.ofNullable(questionDao.findById(questionId)).orElseThrow(QuestionNotFoundException::new);
     }
 
@@ -43,10 +43,10 @@ public class QuestionServiceImpl implements QuestionService {
     }
 
     /**
-     * @see QuestionService#getAnswersIds(long)
+     * @see QuestionService#getAnswersIds(Long)
      */
     @Override
-    public Set<Long> getAnswersIds(long questionId) throws QuestionNotFoundException {
+    public Set<Long> getAnswersIds(Long questionId) throws QuestionNotFoundException {
         Question question = getQuestionById(questionId);
 
         return question.getAnswers().stream()
@@ -55,10 +55,10 @@ public class QuestionServiceImpl implements QuestionService {
     }
 
     /**
-     * @see QuestionService#addAnswer(long, Answer)
+     * @see QuestionService#addAnswer(Long, Answer)
      */
     @Override
-    public Answer addAnswer(long questionId, Answer answer) throws QuestionNotFoundException {
+    public Answer addAnswer(Long questionId, Answer answer) throws QuestionNotFoundException {
         Answer addedAnswer = null;
 
         try {
@@ -81,10 +81,10 @@ public class QuestionServiceImpl implements QuestionService {
     }
 
     /**
-     * @see QuestionService#removeAnswer(long, long)
+     * @see QuestionService#removeAnswer(Long, Long)
      */
     @Override
-    public void removeAnswer(long questionId, long answerId) throws QuestionNotFoundException, AnswerNotFoundException {
+    public void removeAnswer(Long questionId, Long answerId) throws QuestionNotFoundException, AnswerNotFoundException {
 
         try {
             transactionManager.beginWrite();

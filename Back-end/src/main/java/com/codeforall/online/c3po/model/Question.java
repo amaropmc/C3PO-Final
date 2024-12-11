@@ -3,6 +3,7 @@ package com.codeforall.online.c3po.model;
 import jakarta.persistence.*;
 
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -103,5 +104,29 @@ public class Question extends AbstractModel {
      */
     public void setPlanet(Planet planet) {
         this.planet = planet;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+
+        if (!(o instanceof Question question)){
+            return false;
+        }
+
+        if (!super.equals(o)) {
+            return false;
+        }
+
+        return Objects.equals(description, question.description) &&
+                Objects.equals(score, question.score) &&
+                Objects.equals(planet, question.planet);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash((Integer)super.hashCode(), description, score, planet);
     }
 }

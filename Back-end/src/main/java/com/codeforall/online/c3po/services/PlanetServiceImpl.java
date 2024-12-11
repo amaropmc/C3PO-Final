@@ -27,10 +27,10 @@ public class PlanetServiceImpl implements PlanetService {
     private QuestionDao questionDao;
 
     /**
-     * @see PlanetService#getPlanetById(long id)
+     * @see PlanetService#getPlanetById(Long id)
      */
     @Override
-    public Planet getPlanetById(long id) throws PlanetNotFoundException {
+    public Planet getPlanetById(Long id) throws PlanetNotFoundException {
         return Optional.ofNullable(planetDao.findById(id)).orElseThrow(PlanetNotFoundException::new);
     }
 
@@ -69,10 +69,10 @@ public class PlanetServiceImpl implements PlanetService {
     }
 
     /**
-     * @see PlanetService#remove(long)
+     * @see PlanetService#remove(Long)
      */
     @Override
-    public void remove(long id) {
+    public void remove(Long id) {
 
         try {
             transactionManager.beginWrite();
@@ -87,10 +87,10 @@ public class PlanetServiceImpl implements PlanetService {
     }
 
     /**
-     * @see PlanetService#addQuestion(long, Question)
+     * @see PlanetService#addQuestion(Long, Question)
      */
     @Override
-    public Question addQuestion(long planetId, Question question) throws PlanetNotFoundException {
+    public Question addQuestion(Long planetId, Question question) throws PlanetNotFoundException {
         Question addedQuestion = null;
 
         try {
@@ -113,10 +113,10 @@ public class PlanetServiceImpl implements PlanetService {
     }
 
     /**
-     * @see PlanetService#removeQuestion(long, long) 
+     * @see PlanetService#removeQuestion(Long, Long)
      */
     @Override
-    public void removeQuestion(long planetId, long questionId) throws PlanetNotFoundException, QuestionNotFoundException {
+    public void removeQuestion(Long planetId, Long questionId) throws PlanetNotFoundException, QuestionNotFoundException {
         try {
             transactionManager.beginWrite();
 
@@ -139,10 +139,10 @@ public class PlanetServiceImpl implements PlanetService {
     }
 
     /**
-     * @see PlanetService#getQuestionsIds(long) 
+     * @see PlanetService#getQuestionsIds(Long)
      */
     @Override
-    public Set<Long> getQuestionsIds(long planetId) throws PlanetNotFoundException {
+    public Set<Long> getQuestionsIds(Long planetId) throws PlanetNotFoundException {
         Planet planet = getPlanetById(planetId);
 
         return planet.getQuestions().stream()

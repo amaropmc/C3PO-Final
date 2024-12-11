@@ -6,7 +6,7 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 /**
- * A class that represents the data transfor object to {@link Player}
+ * A class that represents the data transfer object to {@link Player}
  */
 public class PlayerDto {
     private Long id;
@@ -14,7 +14,7 @@ public class PlayerDto {
     @NotBlank
     @Size(min = 3, max = 64)
     private String username;
-    private int score;
+    private Integer score;
 
     /**
      * Get the player id
@@ -52,7 +52,7 @@ public class PlayerDto {
      * Get the player score
      * @return the player score
      */
-    public int getScore() {
+    public Integer getScore() {
         return score;
     }
 
@@ -60,7 +60,7 @@ public class PlayerDto {
      * Set the player score
      * @param score the score to set
      */
-    public void setScore(int score) {
+    public void setScore(Integer score) {
         this.score = score;
     }
 }

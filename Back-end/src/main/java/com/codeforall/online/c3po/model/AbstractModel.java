@@ -5,6 +5,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.sql.Timestamp;
+import java.util.Objects;
 
 /**
  * A generic model domain entity to be used as a base for concrete types of models
@@ -13,7 +14,7 @@ import java.sql.Timestamp;
 public class AbstractModel implements Model {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     @Version
     private Integer version;
@@ -28,7 +29,7 @@ public class AbstractModel implements Model {
      * Returns the model's id
      * @return model id
      */
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
@@ -36,7 +37,7 @@ public class AbstractModel implements Model {
      * Sets the model's id
      * @param id the id to set
      */
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -86,5 +87,25 @@ public class AbstractModel implements Model {
      */
     public void setUpdateTime(Timestamp updateTime) {
         this.updateTime = updateTime;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+
+        if (!(o instanceof AbstractModel that)) {
+            return false;
+        }
+        return Objects.equals(id, that.id) &&
+                Objects.equals(version, that.version) &&
+                Objects.equals(creationTime, that.creationTime) &&
+                Objects.equals(updateTime, that.updateTime);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(version, creationTime, updateTime);
     }
 }

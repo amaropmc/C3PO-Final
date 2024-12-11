@@ -19,7 +19,7 @@ public interface QuestionService {
      * @return the question
      * @throws QuestionNotFoundException
      */
-    Question getQuestionById(long questionId) throws QuestionNotFoundException;
+    Question getQuestionById(Long questionId) throws QuestionNotFoundException;
 
     /**
      * Retrieves a list of all the registered questions
@@ -33,7 +33,7 @@ public interface QuestionService {
      * @return a set of answers' id
      * @throws QuestionNotFoundException
      */
-    Set<Long> getAnswersIds(long questionId) throws QuestionNotFoundException;
+    Set<Long> getAnswersIds(Long questionId) throws QuestionNotFoundException;
 
     /**
      * Adds an answer to a specified question
@@ -43,7 +43,7 @@ public interface QuestionService {
      * @throws QuestionNotFoundException
      * @throws AnswerNotFoundException
      */
-    Answer addAnswer(long questionId, Answer answer) throws QuestionNotFoundException, AnswerNotFoundException;
+    Answer addAnswer(Long questionId, Answer answer) throws QuestionNotFoundException, AnswerNotFoundException;
 
     /**
      * Removes an answer from a question
@@ -52,5 +52,5 @@ public interface QuestionService {
      * @throws QuestionNotFoundException
      * @throws AnswerNotFoundException
      */
-    void removeAnswer(long questionId, long answerId) throws QuestionNotFoundException, AnswerNotFoundException;
+    void removeAnswer(Long questionId, Long answerId) throws QuestionNotFoundException, AnswerNotFoundException;
 }

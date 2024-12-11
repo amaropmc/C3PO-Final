@@ -9,11 +9,11 @@ public interface Model {
      * Gets the model id
      * @return the model id
      */
-    long getId();
+    Long getId();
 
     /**
      * Sets the model id
      * @param id the id to set
      */
-    void setId(long id);
+    void setId(Long id);
 }
