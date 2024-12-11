@@ -11,9 +11,9 @@
 
         <!-- connection credentials -->
         <property name="driverClass" value="org.postgresql.Driver"/>
-        <property name="jdbcUrl" value="jdbc:postgresql://localhost/c3po?useSSL=false"/>
-        <property name="user" value="carina"/>
-        <property name="password" value="carina"/>
+        <property name="jdbcUrl" value="jdbc:postgresql://${db.host}/${db.name}?useSSL=false"/>
+        <property name="user" value="${db.username}"/>
+        <property name="password" value="${db.password}"/>
 
         <!-- c3p0 database connection pool management properties -->
         <property name="minPoolSize" value="1"/>
@@ -40,9 +40,9 @@
         <property name="jpaProperties">
             <map>
                 <entry key="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect"/>
-                <entry key="hibernate.show_sql" value="true" />
+                <entry key="hibernate.show_sql" value="${debug.sql}" />
                 <!-- when done creating the schema change to validate -->
-                <entry key="hibernate.hbm2ddl.auto" value="create"/>
+                <entry key="hibernate.hbm2ddl.auto" value="${schema.auto}"/>
             </map>
         </property>
     </bean>

@@ -1,7 +1,7 @@
 import { element } from "/js/views/components/commons/element.js";
 import { div } from "/js/views/components/commons/div.js";
-import { renderPage } from "../controllers/routes.js";
-import { C3PO_URL } from "../controllers/home.js";
+import { C3PO_URL } from "../controllers/index.js";
+import { redirectPage } from "../controllers/redirect.js";
 
 export const getLeaderBoard = async () => {
     const data = await fetch(`${C3PO_URL}/player`);
@@ -11,7 +11,6 @@ export const getLeaderBoard = async () => {
 }
 
 const renderLeaderBoard = (players) => {
-    console.log(players);
 
     const mainElement = document.getElementById("main");
     mainElement.innerHTML = "";
@@ -42,9 +41,7 @@ const renderLeaderBoard = (players) => {
             replayBtn.className = "replay-btn";
             replayBtn.innerHTML = "homepage";
             replayBtn.addEventListener('click', () => {
-                const path = "/";
-                window.history.pushState({}, '', path);
-                renderPage(path);
+                redirectPage("/");
             })
             buttonContainer.appendChild(replayBtn);
 
@@ -52,9 +49,7 @@ const renderLeaderBoard = (players) => {
             exploreBtn.className = "explore-btn";
             exploreBtn.innerHTML = "explore!";
             exploreBtn.addEventListener('click', () => {
-                const path = "/planet";
-                window.history.pushState({}, '', path);
-                renderPage(path);
+                redirectPage("/planet");
             })
             buttonContainer.appendChild(exploreBtn);
 

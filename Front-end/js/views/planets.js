@@ -1,9 +1,10 @@
 import { div } from "/js/views/components/commons/div.js";
 import { element } from "/js/views/components/commons/element.js";
-import { renderPage } from "../controllers/routes.js"
+import { redirectPage } from "../controllers/redirect.js";
 
 const PLANETS_URL = "https://swapi.dev/api/planets/";
 let planets = [];
+export let visitedPlanets = [];
 
 const selectedPlanets = [
   "Tatooine",
@@ -20,7 +21,6 @@ export const loadPlanets = async (func) => {
     const data = await response.json();
     planets = data.results;
 
-    console.log(planets);
     func();
   }
 };
@@ -59,11 +59,7 @@ export const populatePlanets = () => {
     planetButton.onclick = (event) => {
       event.preventDefault();
 
-      const path = `/planet/${planet.name}/quiz`;
-
-      window.history.pushState({}, "", path);
-
-      renderPage(path);
+      redirectPage(`/planet/${planet.name}/quiz`);
     };
     
     // planet info
@@ -102,4 +98,8 @@ export const populatePlanets = () => {
 
     mainElement.appendChild(planetContainer);
   });
+};
+
+export const allPlanetsVisited = () => {
+  return visitedPlanets.length == 6 ? true : false;
 };

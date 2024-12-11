@@ -1,4 +1,4 @@
-import { C3PO_URL } from "./home.js";
+import { C3PO_URL } from "./index.js";
 
 export let player = {
     username: "",

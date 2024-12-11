@@ -1,6 +1,7 @@
 
 import { div } from "/js/views/components/commons/div.js";
-import { renderPage } from "../controllers/routes.js";
+import { element } from "/js/views/components/commons/element.js";
+import { redirectPage } from "../controllers/redirect.js";
 
 
 export const score = (userScore) => {
@@ -10,35 +11,32 @@ export const score = (userScore) => {
     const robotGif = document.createElement('img');
     robotGif.className = "robot-gif";
         
-    let message = '';
+    let message = "";
 
-    if (userScore == 3) {
-        message = `Excellent, Jedi! <br> Your score is: <br> ★★★ <br> You mastered the quiz!`;
-        robotGif.src = "/assets/c3po/dance2.gif"; 
-    } else if (userScore == 2) {
-        message = `Good job, Jedi! <br> Your score is: <br> ★★ <br> You did well!`;
-        robotGif.src = "/assets/c3po/r2.png"; 
-    } else if (userScore == 1) {
-        message = `All good, Jedi! <br> Your score is: <br> ★ <br> Better luck next time!`;
-        robotGif.src = "/assets/c3po/r2.png";     
-    } else { 
-        message = `Better luck next time, Jedi.<br> Your score is:<br> 0 <br> Keep practicing!`;
-        robotGif.src = "/assets/c3po/r2.png"; 
+    switch(userScore){
+        case 3:
+            message = `Excellent, Jedi! <br> Your score is: <br> ${userScore}  <br> You mastered the quiz!`;
+            robotGif.src = "/assets/c3po/dance2.gif"; 
+            break;
+        case 2:
+            message = `Good job, Jedi! <br> Your score is: <br> ${userScore} <br> You did well!`;
+            robotGif.src = "/assets/c3po/r2.png"; 
+            break;
+        case 1:
+            message = `All good, Jedi! <br> Your score is: <br> ${userScore} <br> Better luck next time!`;
+            robotGif.src = "/assets/c3po/r2.png";     
+            break;
+        default:
+            message = `Better luck next time, Jedi.<br> Your score is:<br> ${userScore} <br> Keep practicing!`;
+            robotGif.src = "/assets/c3po/r2.png"; 
     }
 
     const resultContainer = div(["result-container"]);
 
-        const backButton = document.createElement('button');
-        backButton.className = "back-button";
-        backButton.innerHTML = "Back";
+        const backButton = element('button', ["back-button"], "back");
         backButton.onclick = () => {
-            const path = "/planet";
-
-            window.history.pushState({}, "", path);
-
-            renderPage(path);
+            redirectPage("/planet");
         }
-
 
         const resultContent = div(["result-content"]);
 

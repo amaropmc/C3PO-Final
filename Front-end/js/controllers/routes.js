@@ -1,6 +1,6 @@
 import { home, planets, quiz, leaderBoard, scorePage } from "./render.js";
 
-export const routes = [
+const routes = [
     { path: "/", page: home },
     { path: "/planet", page: planets },
     { path: "/planet/:planetName/quiz", page: quiz },

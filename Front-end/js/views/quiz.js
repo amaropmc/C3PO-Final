@@ -1,23 +1,23 @@
 import { div } from "/js/views/components/commons/div.js";
-import { renderPage } from "../controllers/routes.js";
 import { updateUserScore } from "../controllers/player.js";
+import { redirectPage } from "../controllers/redirect.js";
+import { visitedPlanets } from "./planets.js";
+
 
 const GENERAL_QUIZ_URL = "http://localhost:8080/c3po/api/planet";
 
 let userScore = 0;
 let currentQuizUserScore = 0;
 
-let visitedPlanets = [];
-
 export const loadQuiz = async (planetName) => {
 
     if(currentQuizUserScore) {
         currentQuizUserScore = 0;
     }
-    
-    let planetQuiz;
 
     const response = await fetch(GENERAL_QUIZ_URL + `/${planetName}/quiz`);
+
+    let planetQuiz;
 
     if(response.ok) {
         planetQuiz = await response.json();
@@ -28,17 +28,14 @@ export const loadQuiz = async (planetName) => {
     }
 
     if(!visitedPlanets.includes(planetName)) {
-        renderQuiz(planetQuiz);
-        console.log(planetQuiz);
-        const path = `/planet/${planetName}/quiz`;
         visitedPlanets.push(planetName);
+        renderQuiz(planetQuiz);
+
     } else {
         console.log("This planet's quiz has already been taken.");
         alert("You already prove your knowledge about this planet! Try to show me your value in another one");
         
-        const path = "/planet";
-        window.history.pushState({}, "", path);
-        renderPage(path);
+        redirectPage("/planet");
     }
 }
 
@@ -46,7 +43,6 @@ const renderQuiz = planetQuiz => {
     
     /*Tracks which question in the planetQuiz array is currently being displayed.*/    
     let currentQuestionIndex = 0;
-    console.log(currentQuestionIndex);
 
     const showNextQuestion = () => {
         if(currentQuestionIndex < planetQuiz.length) {
@@ -56,7 +52,7 @@ const renderQuiz = planetQuiz => {
             generateQuizCard(planetQuiz[currentQuestionIndex], showNextQuestion);
             currentQuestionIndex ++;
         } else {
-            redirectToScore(currentQuizUserScore);
+            redirectPage(`/planet/${currentQuizUserScore}`);
         }
     }
 
@@ -99,7 +95,7 @@ const generateQuizCard = (questionAndAnswer, onAnswerSelect) => {
                     backButton.addEventListener('click', () => {
                         event.preventDefault;
 
-                        redirectToScore(currentQuizUserScore);
+                        redirectPage(`/planet/${userScore}`);
                     })
                     
                     questionHeader.appendChild(backButton);
@@ -155,14 +151,3 @@ const generateQuizCard = (questionAndAnswer, onAnswerSelect) => {
     mainElement.appendChild(quizFramework);    
 }
 
-const redirectToScore = (userScore) => {
-    const path = `/planet/${userScore}`;
-
-    window.history.pushState({}, "", path);
-
-    renderPage(path);
-}
-
-export const allPlanetsVisited = () => {
-    return visitedPlanets.length == 6 ? true : false;
-}
