@@ -3,6 +3,7 @@ package com.codeforall.online.c3po.controller;
 import com.codeforall.online.c3po.command.PlayerDto;
 import com.codeforall.online.c3po.converters.PlayerDtoToPlayer;
 import com.codeforall.online.c3po.converters.PlayerToPlayerDto;
+import com.codeforall.online.c3po.exceptions.InvalidScoreException;
 import com.codeforall.online.c3po.exceptions.PlayerAlreadyExistsException;
 import com.codeforall.online.c3po.exceptions.PlayerNotFoundException;
 import com.codeforall.online.c3po.model.Player;
@@ -148,12 +149,23 @@ public class PlayerController {
         try {
             Player player = playerDtoToPlayer.convert(playerDto);
 
-            playerService.updatePlayerScore(player.getUsername(), player.getTotalScore());
+            Player playerToUpdate = playerService.getPlayer(player.getUsername());
+
+            if(player.getTotalScore() > playerToUpdate.getTotalScore()) {
+                playerToUpdate.setTotalScore(player.getTotalScore());
+            } else {
+                throw new InvalidScoreException();
+            }
+
+            playerService.updatePlayerScore(playerToUpdate.getUsername(), playerToUpdate.getTotalScore());
 
             return new ResponseEntity<>(HttpStatus.OK);
 
         } catch (PlayerNotFoundException e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+
+        } catch (InvalidScoreException e) {
+            return new ResponseEntity<>(HttpStatus.UNPROCESSABLE_ENTITY);
         }
     }
 

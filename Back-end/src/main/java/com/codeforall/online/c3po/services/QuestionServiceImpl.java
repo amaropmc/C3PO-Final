@@ -61,13 +61,12 @@ public class QuestionServiceImpl implements QuestionService {
     public Answer addAnswer(Long questionId, Answer answer) throws QuestionNotFoundException {
         Answer addedAnswer = null;
 
+        Question question = getQuestionById(questionId);
+
         try {
             transactionManager.beginWrite();
 
-            Question question = getQuestionById(questionId);
-
             question.addAnswer(answer); // This will also set this answer question property to this question
-
             questionDao.saveOrUpdate(question);
             addedAnswer = answerDao.saveOrUpdate(answer);
 
@@ -84,21 +83,15 @@ public class QuestionServiceImpl implements QuestionService {
      * @see QuestionService#removeAnswer(Long, Long)
      */
     @Override
-    public void removeAnswer(Long questionId, Long answerId) throws QuestionNotFoundException, AnswerNotFoundException {
+    public void removeAnswer(Long questionId, Answer answer) throws QuestionNotFoundException {
+        Question question = getQuestionById(questionId);
 
         try {
             transactionManager.beginWrite();
 
-            Question question = getQuestionById(questionId);
-
-            Answer answerToRemove = answerDao.findById(answerId);
-            if(answerToRemove == null) {
-                throw new AnswerNotFoundException();
-            }
-
-            question.removeAnswer(answerToRemove); //This also sets the answer's question to null
+            question.removeAnswer(answer); //This also sets the answer's question to null
             questionDao.saveOrUpdate(question);
-            answerDao.delete(answerId);
+            answerDao.delete(answer.getId());
 
             transactionManager.commit();
 

@@ -1,6 +1,7 @@
 package com.codeforall.online.c3po.services;
 
 
+import com.codeforall.online.c3po.exceptions.InvalidScoreException;
 import com.codeforall.online.c3po.exceptions.PlayerNotFoundException;
 import com.codeforall.online.c3po.model.Player;
 import com.codeforall.online.c3po.persistence.dao.PlayerDao;
@@ -50,13 +51,16 @@ public class PlayerServiceImpl implements PlayerService {
             throw new IllegalArgumentException("Username cannot be null or empty");
         }
 
+        if (score == null || score < 0) {
+            throw new IllegalArgumentException("Score cannot be null or negative");
+        }
+
+        player = new Player();
+        player.setUsername(username);
+        player.setTotalScore(score);
+
         try {
             transactionManager.beginWrite();
-
-            player = new Player();
-
-            player.setUsername(username);
-            player.setTotalScore(score);
 
             playerDao.saveOrUpdate(player);
 
@@ -105,11 +109,7 @@ public class PlayerServiceImpl implements PlayerService {
      */
     @Override
     public int getTotalScore(String username) throws PlayerNotFoundException {
-        Player player = playerDao.findByUsername(username);
-
-        if(player == null) {
-            throw new PlayerNotFoundException();
-        }
+        player = getPlayer(username);
 
         return player.getTotalScore() != null ? player.getTotalScore() : 0;
     }
@@ -118,20 +118,14 @@ public class PlayerServiceImpl implements PlayerService {
      * @see PlayerService#updatePlayerScore(String, Integer)
      */
     @Override
-    public boolean updatePlayerScore(String username, Integer newScore) throws PlayerNotFoundException {
-        player = playerDao.findByUsername(username);
-
-        if(player == null) {
-            throw new PlayerNotFoundException();
-        }
+    public boolean updatePlayerScore(String username, Integer newScore) throws PlayerNotFoundException, InvalidScoreException {
+        player = getPlayer(username);
+        player.setTotalScore(newScore);
 
         try {
             transactionManager.beginWrite();
 
-            if(newScore > (player.getTotalScore() != null ? player.getTotalScore() : 0)) {
-                player.setTotalScore(newScore);
-                playerDao.saveOrUpdate(player);
-            }
+            playerDao.saveOrUpdate(player);
 
             transactionManager.commit();
 

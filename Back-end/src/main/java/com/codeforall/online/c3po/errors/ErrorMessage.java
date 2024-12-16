@@ -10,4 +10,5 @@ public class ErrorMessage {
     public static final String ANSWER_NOT_FOUND = "Answer not found";
     public static final String PLAYER_NOT_FOUND = "Player not found";
     public static final String PLAYER_ALREADY_EXISTS = "Player already exists";
+    public static final String INVALID_NEW_SCORE = "The player's new score is lower than current score";
 }
