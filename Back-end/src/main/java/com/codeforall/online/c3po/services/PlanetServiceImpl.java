@@ -1,6 +1,8 @@
 package com.codeforall.online.c3po.services;
 
+import com.codeforall.online.c3po.exceptions.PlanetAlreadyExistsException;
 import com.codeforall.online.c3po.exceptions.PlanetNotFoundException;
+import com.codeforall.online.c3po.exceptions.PlayerNotFoundException;
 import com.codeforall.online.c3po.exceptions.QuestionNotFoundException;
 import com.codeforall.online.c3po.model.Planet;
 import com.codeforall.online.c3po.model.Question;
@@ -54,6 +56,10 @@ public class PlanetServiceImpl implements PlanetService {
     public Planet add(Planet planet) {
         Planet savedPlanet = null;
 
+        if (planet == null) {
+            throw new IllegalArgumentException("Planet cannot be null");
+        }
+
         try {
             transactionManager.beginWrite();
 
@@ -72,12 +78,14 @@ public class PlanetServiceImpl implements PlanetService {
      * @see PlanetService#remove(Long)
      */
     @Override
-    public void remove(Long id) {
+    public void remove(Long planetId) throws PlanetNotFoundException {
+        
+        Planet planet = getPlanetById(planetId);
 
         try {
             transactionManager.beginWrite();
 
-            planetDao.delete(id);
+            planetDao.delete(planetId);
 
             transactionManager.commit();
 
@@ -93,10 +101,14 @@ public class PlanetServiceImpl implements PlanetService {
     public Question addQuestion(Long planetId, Question question) throws PlanetNotFoundException {
         Question addedQuestion = null;
 
+        Planet planet = getPlanetById(planetId);
+
+        if(planet == null) {
+            throw new PlanetNotFoundException();
+        }
+
         try {
             transactionManager.beginWrite();
-
-            Planet planet = getPlanetById(planetId);
 
             planet.addQuestion(question); //This will also set this question planet property to this planet
 
@@ -117,15 +129,16 @@ public class PlanetServiceImpl implements PlanetService {
      */
     @Override
     public void removeQuestion(Long planetId, Long questionId) throws PlanetNotFoundException, QuestionNotFoundException {
+
+        Planet planet = getPlanetById(planetId);
+
+        Question questionToRemove = questionDao.findById(questionId);
+        if (questionToRemove == null) {
+            throw new QuestionNotFoundException();
+        }
+
         try {
             transactionManager.beginWrite();
-
-            Planet planet = getPlanetById(planetId);
-
-            Question questionToRemove = questionDao.findById(questionId);
-            if (questionToRemove == null) {
-                throw new QuestionNotFoundException();
-            }
 
             planet.removeQuestion(questionToRemove); //This will also set the question's planet to null
             planetDao.saveOrUpdate(planet);

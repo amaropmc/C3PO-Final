@@ -1,5 +1,6 @@
 package com.codeforall.online.c3po.services;
 
+import com.codeforall.online.c3po.exceptions.InvalidScoreException;
 import com.codeforall.online.c3po.exceptions.PlayerNotFoundException;
 import com.codeforall.online.c3po.model.Player;
 
@@ -50,7 +51,7 @@ public interface PlayerService {
      * @param newScore the new player's score
      * @return either true or false
      */
-    boolean updatePlayerScore(String username, Integer newScore) throws PlayerNotFoundException;
+    boolean updatePlayerScore(String username, Integer newScore) throws PlayerNotFoundException, InvalidScoreException;
 
     /**
      * Get the player score

@@ -48,9 +48,9 @@ public interface QuestionService {
     /**
      * Removes an answer from a question
      * @param questionId the question id
-     * @param answerId the id of the answer to be removed
+     * @param answer the answer to be removed
      * @throws QuestionNotFoundException
      * @throws AnswerNotFoundException
      */
-    void removeAnswer(Long questionId, Long answerId) throws QuestionNotFoundException, AnswerNotFoundException;
+    void removeAnswer(Long questionId, Answer answer) throws QuestionNotFoundException, AnswerNotFoundException;
 }

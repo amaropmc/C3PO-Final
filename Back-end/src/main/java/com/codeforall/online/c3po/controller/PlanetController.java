@@ -3,7 +3,6 @@ package com.codeforall.online.c3po.controller;
 import com.codeforall.online.c3po.command.PlanetDto;
 import com.codeforall.online.c3po.converters.PlanetDtoToPlanet;
 import com.codeforall.online.c3po.converters.PlanetToPlanetDto;
-import com.codeforall.online.c3po.exceptions.PlanetAlreadyExistsException;
 import com.codeforall.online.c3po.exceptions.PlanetNotFoundException;
 import com.codeforall.online.c3po.model.Planet;
 import com.codeforall.online.c3po.services.PlanetService;
@@ -41,14 +40,9 @@ public class PlanetController {
     @RequestMapping(method = RequestMethod.GET, path = {"","/"})
     public ResponseEntity<List<PlanetDto>> listPlanets() {
 
-        try{
-            List<Planet> planets = planetService.list();
+        List<Planet> planets = planetService.list();
 
-            return new ResponseEntity<>(planetToPlanetDto.convert(planets), HttpStatus.OK);
-
-        } catch (PlanetNotFoundException e) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
+        return new ResponseEntity<>(planetToPlanetDto.convert(planets), HttpStatus.OK);
     }
 
     /**
@@ -89,36 +83,32 @@ public class PlanetController {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
 
-        try {
-            Planet planet = planetDtoToPlanet.convert(planetDto);
+        Planet planet = planetDtoToPlanet.convert(planetDto);
 
-            if (planet == null) {
-                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-            }
-
-            Planet savedPlanet = null;
-
-            try {
-                Planet planetExists = planetService.getPlanetByName(planet.getName());
-
-                if (planetExists != null) {
-                    throw new PlanetAlreadyExistsException();
-                }
-
-            } catch (PlanetNotFoundException e) {
-                savedPlanet = planetService.add(planet);
-            }
-            UriComponents uriComponents = uriComponentsBuilder
-                    .path("/api/planet/" + savedPlanet.getName()).build();
-
-            HttpHeaders headers = new HttpHeaders();
-            headers.setLocation(uriComponents.toUri());
-
-            return new ResponseEntity<>(headers, HttpStatus.CREATED);
-
-        } catch (PlanetAlreadyExistsException e) {
-            return new ResponseEntity<>(HttpStatus.CONFLICT);
+        if (planet == null) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
+
+        Planet savedPlanet = null;
+
+        try {
+            Planet planetExists = planetService.getPlanetByName(planet.getName());
+
+            if(planetExists != null) {
+                return new ResponseEntity<>(HttpStatus.CONFLICT);
+            }
+
+        } catch (PlanetNotFoundException e) {
+            savedPlanet = planetService.add(planet);
+        }
+
+        UriComponents uriComponents = uriComponentsBuilder
+                .path("/api/planet/" + savedPlanet.getName()).build();
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setLocation(uriComponents.toUri());
+
+        return new ResponseEntity<>(headers, HttpStatus.CREATED);
     }
 
     /**

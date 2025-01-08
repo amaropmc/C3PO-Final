@@ -1,5 +1,6 @@
 package com.codeforall.online.c3po.services;
 
+import com.codeforall.online.c3po.exceptions.PlanetAlreadyExistsException;
 import com.codeforall.online.c3po.exceptions.PlanetNotFoundException;
 import com.codeforall.online.c3po.exceptions.QuestionNotFoundException;
 import com.codeforall.online.c3po.model.Planet;
@@ -32,9 +33,8 @@ public interface PlanetService {
     /**
      * Retrieves a list of all the registered planets
      * @return a list of planets
-     * @throws PlanetNotFoundException
      */
-    List<Planet> list() throws PlanetNotFoundException;
+    List<Planet> list();
 
     /**
      * Add a new planet
@@ -47,7 +47,7 @@ public interface PlanetService {
      * Removes a planet
      * @param planetId the id of the planet to be removed
      */
-    void remove(Long planetId);
+    void remove(Long planetId) throws PlanetNotFoundException;
 
     /**
      * Retrieves all the planet's questions' Ids
